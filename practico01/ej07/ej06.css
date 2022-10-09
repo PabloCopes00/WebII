@@ -1,0 +1,15 @@
+table {
+  border-collapse: collapse;
+}
+th,
+tr,
+td {
+  border: 1px solid black;
+  padding: 7px;
+  text-align: center;
+}
+
+.amarillo {
+  background: yellow;
+  font-weight: bold;
+}
