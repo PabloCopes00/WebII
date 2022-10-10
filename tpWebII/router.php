@@ -48,16 +48,28 @@ switch ($params[0]) {
       $beerController  = new BeerController();
       $beerController ->insertEditBeer($id);  
        break;
+   case 'showEditDesc':
+      $id = $params[1];
+      $beerDescController = new BeerDesc();
+      $beerDescController->showEditBeerDesc($id);  
+       break;
+   case 'editBeerDesc':
+      $id = $params[1];
+      $beerDescController = new BeerDesc();
+      $beerDescController ->insertEditBeerDesc($id);  
+       break;
    case 'deleteBeerDesc':
       $id = $params[1];
        $beerDescController = new BeerDesc();
        $beerDescController->deleteBeerDesc($id);  
        break;
+
    case 'deleteBear':
       $id = $params[1];
       $beerController = new BeerController();
       $beerController->deleteBeer($id);  
-          break;            
+          break;  
+
    default:
        echo('404 Page not found');
        break;

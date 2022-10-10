@@ -11,4 +11,10 @@ class BeerDescView {
         $this->smarty->assign('beerDesc', $beerDesc);
         $this->smarty->display('beerDescView.tpl');
     }
+    function showEditBeerDesc($beerDesc){
+        $this->smarty->assign('beerDesc', $beerDesc); 
+        $this->smarty->display('showEditBeerDesc.tpl');
+    }
 } 
+
+
