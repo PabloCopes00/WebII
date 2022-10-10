@@ -30,8 +30,13 @@
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-light" type="submit">Search</button>
-          <a href="home"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Login</button></a>
         </form>
+          {if !isset($smarty.session.USER_ID)}
+          <a href="login"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Login</button></a>
+          {else} 
+          <a href="logout"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Logout</button></a>
+          <span><p style="color:#777777">User: {$smarty.session.USER_EMAIL}</p></span>
+         {/if}  
       </div>
     </div>
   </nav>

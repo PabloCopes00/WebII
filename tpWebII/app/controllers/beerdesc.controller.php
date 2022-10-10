@@ -1,6 +1,7 @@
 <?php
 require_once './app/models/beerdesc.model.php';
 require_once './app/views/beerdesc.view.php';
+require_once './app/helpers/auth.helper.php';
 
 class BeerDesc{
    private $model;
@@ -9,6 +10,10 @@ class BeerDesc{
    public function __construct(){
     $this->model = new BeerDescModel();
     $this->view = new BeerDescView();
+    
+    $authHelper = new AuthHelper();
+    $authHelper->checkLoggedIn();
+
 }
 
 public function showBeerDesc() {

@@ -2,6 +2,7 @@
 require_once './app/controllers/beer.controller.php';
 require_once './app/controllers/beerdesc.controller.php';
 require_once './app/controllers/home.controller.php';
+require_once './app/controllers/auth.controller.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -22,6 +23,19 @@ switch ($params[0]) {
       $homeController = new HomeController();
       $homeController->showHome();
       break;
+   case 'login':
+      $authController = new AuthController();
+      $authController->showFormLogin();
+      break;
+   case 'validate':
+      $authController = new AuthController();
+      $authController->validateUser();
+      break;
+   case 'logout':
+      $authController = new AuthController();
+      $authController->logout();
+      break;
+ 
    case 'showBeers':
       $beerController = new BeerController();
       $beerController->showBeers();
