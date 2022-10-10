@@ -25,7 +25,6 @@
    <td>{$beer->type}</td>
    <td>{$beer->container}</td>
    <td>${$beer->price}</td>
-   {*<td><a href='delete/{$desc->id}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>*}
    </tr>
 {/foreach}
 </tbody>

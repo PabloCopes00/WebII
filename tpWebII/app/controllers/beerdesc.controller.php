@@ -29,6 +29,7 @@ function addBeerDesc() {
     $description = $_POST['description'];
     $img = $_POST['img'];
     $id = $this->model->insertBeer($beer_name, $abv, $ibu, $description, $img);
+    header("Location: " . BASE_URL. 'beerDesc');
 }
 function  showEditBeerDesc($id){
     $beerDesc = $this->model->getRegisterDescById2($id);
@@ -43,6 +44,7 @@ function insertEditBeerDesc($id){
         $img = $_POST['img'];
 
         $this->model->insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id);
+        header("Location: " . BASE_URL. 'beerDesc');
     }
 }
 function deleteBeerDesc($id) {

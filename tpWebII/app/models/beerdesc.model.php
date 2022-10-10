@@ -34,13 +34,11 @@ class BeerDescModel {
          $query->execute([$beer_name, $abv, $ibu, $description, $img]);
          
          return $this->db->lastInsertId();
-         header("Location: " . BASE_URL. 'beerDesc');
      }
      public function insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id){
         
         $query = $this->db->prepare("UPDATE `beerNameDesc` SET beer_name=?, abv=?, ibu=?, description=?, img=? WHERE id_name_fk=?");
         $query->execute([$beer_name, $abv, $ibu, $description, $img, $id]);
-        header("Location: " . BASE_URL. 'beerDesc');
 }
 
      function deleteBeerById($id) {

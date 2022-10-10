@@ -33,6 +33,7 @@ class BeerController {
             $price = $_POST['price'];
    
             $id = $this->model->insertBeer($type, $container, $stock, $price, $beerOption);
+            header("Location: " . BASE_URL. 'showBeers');
         }
     }
 
@@ -52,6 +53,7 @@ class BeerController {
 
    
             $this->model->insertEditBeer($type, $container, $stock, $price, $beerOption, $id);
+            header("Location: " . BASE_URL. 'showBeers');
         }
     }
      // borrar el registro del id seleccionado (boton)
