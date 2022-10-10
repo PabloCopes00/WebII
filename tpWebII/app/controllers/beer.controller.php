@@ -30,7 +30,26 @@ class BeerController {
    
             $id = $this->model->insertBeer($type, $container, $stock, $price, $beerOption);
         }
-     }
+    }
+
+    function  showEditBeer($id){
+            $beers = $this->model->getRegisterById($id);
+            $beerDesc = $this->modelDesc->getRegisterDescById($id);
+            $this->view->showEditBeers($beers, $beerDesc);
+    }
+
+    function insertEditBeer($id){
+        if((isset($_POST['type'])&&isset($_POST['container'])&&isset($_POST['stock'])&&isset($_POST['price'])&&isset($_POST['beerOption']))&&!empty($_POST['type'])&&!empty($_POST['container'])&&!empty($_POST['stock'])&&!empty($_POST['price'])&&!empty($_POST['beerOption'])){      
+            $type = $_POST['type'];
+            $beerOption = $_POST['beerOption'];
+            $container = $_POST['container'];
+            $stock = $_POST['stock'];
+            $price = $_POST['price'];
+
+   
+            $this->model->insertEditBeer($type, $container, $stock, $price, $beerOption, $id);
+        }
+    }
      // borrar el registro del id seleccionado (boton)
      function deleteBeer($id) {
          $this->model->deleteBeerById($id);

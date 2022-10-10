@@ -38,6 +38,16 @@ switch ($params[0]) {
       $beerDescController = new BeerDesc();
       $beerDescController->addBeerDesc();
       break;
+   case 'showEdit':
+      $id = $params[1];
+      $beerController  = new BeerController();
+      $beerController ->showEditBeer($id);  
+       break;
+   case 'editBeer':
+      $id = $params[1];
+      $beerController  = new BeerController();
+      $beerController ->insertEditBeer($id);  
+       break;
    case 'deleteBeerDesc':
       $id = $params[1];
        $beerDescController = new BeerDesc();
