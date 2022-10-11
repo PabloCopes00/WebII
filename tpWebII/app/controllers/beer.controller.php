@@ -31,10 +31,17 @@ class BeerController {
             $container = $_POST['container'];
             $stock = $_POST['stock'];
             $price = $_POST['price'];
-   
-            $id = $this->model->insertBeer($type, $container, $stock, $price, $beerOption);
-            header("Location: " . BASE_URL. 'showBeers');
+            //agrego imagen
+        if ($_FILES['input_name']['type'] =="image/jpg" ||
+            $_FILES['input_name']['type'] =="image/jpeg"||
+            $_FILES['input_name']['type'] =="image/png" ){
+            $this->model->insertBeer($type, $container, $stock, $price, $beerOption, $_FILES['input_name']['tmp_name']);
         }
+        else{
+                $id = $this->model->insertBeer($type, $container, $stock, $price, $beerOption);
+        }
+                header("Location: " . BASE_URL. 'showBeers');
+            }
     }
 
     function  showEditBeer($id){
@@ -50,6 +57,7 @@ class BeerController {
             $container = $_POST['container'];
             $stock = $_POST['stock'];
             $price = $_POST['price'];
+
 
    
             $this->model->insertEditBeer($type, $container, $stock, $price, $beerOption, $id);

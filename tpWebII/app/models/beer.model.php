@@ -21,16 +21,22 @@ class BeerModel {
         return $beerRegister;
     }
 
-    public function insertBeer($type, $container, $stock, $price, $beerOption) {
-        $query = $this->db->prepare("INSERT INTO beerSale (type, container, stock, price, fk_id_name) VALUES (?, ?, ?, ?, ?)");
-        $query->execute([$type, $container, $stock, $price, $beerOption]);
+    public function insertBeer($type, $container, $stock, $price, $beerOption, $imagen = null) {
+        $pathImg = null;
+        if ($imagen){
+        $pathImg = $this->uploadImage($imagen);
+        }
+        $query = $this->db->prepare("INSERT INTO beerSale (type, container, stock, price, fk_id_name, img) VALUES (?, ?, ?, ?, ?, ?)");
+        $query->execute([$type, $container, $stock, $price, $beerOption, $pathImg]);
          
          return $this->db->lastInsertId();
          header("Location: " . BASE_URL. 'showBeers');
      }
-
-     //aca estamos y tenemos que ver como hacer el update con esos datos que tenemos.
-     //saludos mis amigos de youtube.jajajajajaja
+     private function uploadImage($image){
+        $target = 'images/' . uniqid() . '.jpg';
+        move_uploaded_file($image, $target);
+        return $target;
+    }
     public function insertEditBeer($type, $container, $stock, $price, $beerOption, $id){
         
             $query = $this->db->prepare("UPDATE `beerSale` SET type=?, container=?, stock=?, price=?, fk_id_name=? WHERE id=?");

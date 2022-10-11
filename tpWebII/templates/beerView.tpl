@@ -2,6 +2,7 @@
 <table class="table">
 <thead class="table-dark">
  <tr>
+   <th></th>
    <th>Id</th>
    <th>Id_Fk</th>
    <th>Tipo</th>
@@ -15,6 +16,11 @@
 <tbody>
 {foreach from=$beers item=$beer}
    <tr>
+   <td>
+      {if isset($beer->img)}
+        <img src="{$beer->img}" style="width:3rem;"/>
+       {/if}
+   </td>
    <td>{$beer->id}</td>
    <td>{$beer->fk_id_name}</td>
    <td>{$beer->type}</td>
@@ -28,7 +34,7 @@
 </tbody>
 </table>
 <h1>Add Form</h1>
-<form action="addBeer" method="POST" class="my-4">
+<form action="addBeer" method="POST" class="my-4" enctype="multipart/form-data">
 <div class="mb-3">
 <label class="form-label">Seleccione una opcion:</label>
 <select name="beerOption" class="form-control">
