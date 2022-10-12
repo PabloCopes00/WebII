@@ -35,7 +35,11 @@ switch ($params[0]) {
       $authController = new AuthController();
       $authController->logout();
       break;
- 
+    case 'filter':
+       $id = $params[1];
+       $homeController = new HomeController();
+       $homeController->filterCategory($id);
+        break;   
    case 'showBeers':
       $beerController = new BeerController();
       $beerController->showBeers();
@@ -77,7 +81,6 @@ switch ($params[0]) {
        $beerDescController = new BeerDesc();
        $beerDescController->deleteBeerDesc($id);  
        break;
-
    case 'deleteBear':
       $id = $params[1];
       $beerController = new BeerController();

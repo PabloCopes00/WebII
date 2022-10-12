@@ -34,15 +34,6 @@
 </tbody>
 </table>
 <h1>Add Form</h1>
-<form action="addBeer" method="POST" class="my-4" enctype="multipart/form-data">
-<div class="mb-3">
-<label class="form-label">Seleccione una opcion:</label>
-<select name="beerOption" class="form-control">
-{foreach from=$beerDesc item=$beer }
-  <option value="{$beer->id_name_fk}">{$beer->beer_name}</option> 
-{/foreach}
-</select> 
-</div>
 {include file="formBeer.tpl"}
 {include file="footer.tpl"}
   

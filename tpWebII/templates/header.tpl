@@ -34,7 +34,7 @@
                    </a>
                    <ul class="dropdown-menu dropdown-menu-dark">
                    {foreach from=$beerDesc item=$desc}
-                    <li><a class="dropdown-item" href="{$desc->id_name_fk}">{$desc->beer_name}</a></li>
+                    <li><a class="dropdown-item" href="filter/{$desc->id_name_fk}">{$desc->beer_name}</a></li>
                    {/foreach}
                    </ul>
                  </li>
