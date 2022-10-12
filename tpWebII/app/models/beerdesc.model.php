@@ -16,6 +16,12 @@ class BeerDescModel {
         $beerDesc = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objeto
         return $beerDesc;
     }
+    public function getNameById($id){
+        $query = $this->db->prepare("SELECT `beer_name`FROM `beerNameDesc` WHERE `id_name_fk`= ?");
+        $query->execute([$id]);
+        $name = $query->fetch(PDO::FETCH_OBJ);
+        return $name;
+    }
     public function getRegisterDescById($id){
         $query = $this->db->prepare("SELECT * FROM beerNameDesc");
         $query->execute();

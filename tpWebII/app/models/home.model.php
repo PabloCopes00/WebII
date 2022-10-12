@@ -15,8 +15,7 @@ class HomeModel {
         $beers = $query->fetchAll(PDO::FETCH_OBJ);
         return $beers;
     }
-     public function getFilter($id){
-        // $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.abv, beerNameDesc.ibu, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc WHERE beerNameDesc.id_name_fk = ?");
+     public function getFilter($id){       
         $query = $this->db->prepare("SELECT * FROM beerSale WHERE fk_id_name = ?"); 
         $query->execute([$id]);
 

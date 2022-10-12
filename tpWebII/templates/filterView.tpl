@@ -1,10 +1,9 @@
 {include file="header.tpl"}
 <table class="table">
 <thead class="table-dark">
-  <h1 class="font-monospace fw-bold display-2 text-center" style="margin: 3rem; text-shadow: 1px 1px 2px rgb(59, 59, 59), 0 0 1em rgb(95, 95, 95), 0 0 0.2em rgb(125, 125, 125);">Nombre de la cerveza filtro</h1>
+  <h1 class="font-monospace fw-bold display-2 text-center" style="margin: 3rem; text-shadow: 1px 1px 2px rgb(59, 59, 59), 0 0 1em rgb(95, 95, 95), 0 0 0.2em rgb(125, 125, 125);">{$name->beer_name}</h1>
   <tr>
    <th></th>
-   {* <th>Nombre</th> *}
    <th>Tipo</th>
    <th>Contenedor</th>
    <th>Precio</th>
@@ -18,7 +17,6 @@
     <img src="{$filter->img}" alt="{$filter->beer_name}" style="width:3rem;"/>
    {/if}
    </td>
-   {* <td>{$filter->beer_name}</td> *}
    <td>{$filter->type}</td>
    <td>{$filter->container}</td>
    <td>${$filter->price}</td>

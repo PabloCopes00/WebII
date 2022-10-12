@@ -19,9 +19,11 @@ class HomeController {
         $this->view->showHome($beers, $beerDesc);
     }
      public function filterCategory($id){
+
+        $name = $this->modelDesc->getNameById($id);
+        $filters = $this->model->getFilter($id);
         $beerDesc = $this->modelDesc->getAllBeerDesc();
-        $filter = $this->model->getFilter($id);
-        $this->view->showFilter($filter, $beerDesc);
+        $this->view->showFilter($filters, $name, $beerDesc);
      }
 }
 

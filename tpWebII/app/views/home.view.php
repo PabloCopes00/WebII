@@ -12,9 +12,10 @@ class HomeView {
         $this->smarty->assign('beerDesc', $beerDesc); 
         $this->smarty->display('homeView.tpl');
     }
-    function showFilter($filters, $beerDesc){
-        $this->smarty->assign('beerDesc', $beerDesc); 
+    function showFilter($filters, $name, $beerDesc){
+        $this->smarty->assign('name', $name); 
         $this->smarty->assign('filters', $filters);
+        $this->smarty->assign('beerDesc', $beerDesc);
         $this->smarty->display('filterView.tpl');
     }
 } 
