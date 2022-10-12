@@ -26,16 +26,27 @@
           <li class="nav-item">
             <a class="nav-link" href="beerDesc">Tabla Secundaria</a>
           </li>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+               <ul class="navbar-nav">
+                 <li class="nav-item dropdown">
+                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Categoria
+                   </a>
+                   <ul class="dropdown-menu dropdown-menu-dark">
+                   {foreach from=$beerDesc item=$desc}
+                    <li><a class="dropdown-item" href="{$desc->id_name_fk}">{$desc->beer_name}</a></li>
+                   {/foreach}
+                   </ul>
+                 </li>
+               </ul>
+             </div>
+           </div>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>
           {if !isset($smarty.session.USER_ID)}
           <a href="login"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Login</button></a>
           {else} 
           <a href="logout"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Logout</button></a>
-          <span><p style="color:#777777">User: {$smarty.session.USER_EMAIL}</p></span>
+          <span><p style="color:#777777" class="user-select-none">User: {$smarty.session.USER_EMAIL}</p></span>
          {/if}  
       </div>
     </div>

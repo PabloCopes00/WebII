@@ -20,7 +20,11 @@
 <tbody>
 {foreach from=$beers item=$beer}
    <tr>
-   <td><img src="images/{$beer->img}" alt="{$beer->beer_name}" style="width: 3rem;"></td>
+   <td>
+   {if isset($beer->img)}
+    <img src="{$beer->img}" alt="{$beer->beer_name}" style="width:3rem;"/>
+   {/if}
+   </td>
    <td>{$beer->beer_name}</td>
    <td>{$beer->type}</td>
    <td>{$beer->container}</td>

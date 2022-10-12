@@ -29,17 +29,27 @@ class BeerDescModel {
         return $beerRegister;
     }
     
-    function insertBeer($beer_name, $abv, $ibu, $description, $img) { 
-        $query = $this->db->prepare("INSERT INTO beerNameDesc (beer_name, abv, ibu, description, img) VALUES (?, ?, ?, ?,?)");
-         $query->execute([$beer_name, $abv, $ibu, $description, $img]);
-         
+    function insertBeer($beer_name, $abv, $ibu, $description, $imagen = null) { 
+        $pathImg = null;
+        if ($imagen){
+        $pathImg = $this->uploadImage($imagen);
+        }
+        $query = $this->db->prepare("INSERT INTO beerNameDesc (beer_name, abv, ibu, description, img) VALUES (?, ?, ?, ?, ?)");
+        $query->execute([$beer_name, $abv, $ibu, $description, $pathImg]);
          return $this->db->lastInsertId();
      }
-     public function insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id){
+
+     private function uploadImage($image){
+        $target = 'images/' . uniqid() . '.jpg';
+        move_uploaded_file($image, $target);
+        return $target;
+    }
+
+    public function insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id){
         
         $query = $this->db->prepare("UPDATE `beerNameDesc` SET beer_name=?, abv=?, ibu=?, description=?, img=? WHERE id_name_fk=?");
         $query->execute([$beer_name, $abv, $ibu, $description, $img, $id]);
-}
+    }
 
      function deleteBeerById($id) {
         $query = $this->db->prepare('DELETE FROM beerNameDesc WHERE id_name_fk = ?');

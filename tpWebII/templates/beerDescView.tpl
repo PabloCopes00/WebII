@@ -10,13 +10,16 @@
             <th>Descripcion</th>
             <th></th>
             <th></th>
-            
           </tr>
          </thead>
          <tbody>        
          {foreach from=$beerDesc item=$desc}
             <tr>
-            <td><img src="images/{$desc->img}" alt="{$desc->beer_name}" style="width: 3rem;"></td>
+            <td>
+               {if isset($desc->img)}
+                   <img src="{$desc->img}" alt="{$desc->beer_name}" style="width:3rem;"/>
+               {/if}
+            </td>
             <td>{$desc->beer_name}</td>
             <td>{$desc->abv}%</td>
             <td>{$desc->ibu}</td>

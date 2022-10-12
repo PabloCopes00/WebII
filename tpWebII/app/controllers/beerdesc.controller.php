@@ -27,10 +27,19 @@ function addBeerDesc() {
     $abv = $_POST['abv'];
     $ibu = $_POST['ibu'];
     $description = $_POST['description'];
-    $img = $_POST['img'];
-    $id = $this->model->insertBeer($beer_name, $abv, $ibu, $description, $img);
-    header("Location: " . BASE_URL. 'beerDesc');
+
+    if ($_FILES['input_name']['type'] =="image/jpg" ||
+            $_FILES['input_name']['type'] =="image/jpeg"||
+            $_FILES['input_name']['type'] =="image/png" ){
+            $this->model->insertBeer($beer_name, $abv, $ibu, $description, $_FILES['input_name']['tmp_name']);
+        }
+        else{
+                $this->model->insertBeer($beer_name, $abv, $ibu, $description);
+        }
+        header("Location: " . BASE_URL. 'beerDesc');
 }
+
+
 function  showEditBeerDesc($id){
     $beerDesc = $this->model->getRegisterDescById2($id);
     $this->view->showEditBeerDesc($beerDesc);
