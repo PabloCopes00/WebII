@@ -18,13 +18,10 @@
       <img src="images/logo22.png" style="width: 3.5rem;">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home">Home</a>
+            <a class="nav-link" href="showBeers">Ventas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="showBeers">Tabla Primaria</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="beerDesc">Tabla Secundaria</a>
+            <a class="nav-link" href="beerDesc">Cervezas</a>
           </li>
           <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                <ul class="navbar-nav">

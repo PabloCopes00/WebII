@@ -12,7 +12,7 @@ class BeerDesc{
     $this->view = new BeerDescView();
     
     $authHelper = new AuthHelper();
-    $authHelper->checkLoggedIn();
+    //$authHelper->checkLoggedIn();
 
 }
 

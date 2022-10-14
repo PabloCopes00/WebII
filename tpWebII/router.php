@@ -1,12 +1,11 @@
 <?php
 require_once './app/controllers/beer.controller.php';
 require_once './app/controllers/beerdesc.controller.php';
-require_once './app/controllers/home.controller.php';
 require_once './app/controllers/auth.controller.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-$action = 'home'; // acción por defecto
+$action = 'showBeers'; // acción por defecto
 
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
@@ -19,27 +18,23 @@ $params = explode('/', $action);
 
 // tabla de ruteo
 switch ($params[0]) {
-   case 'home':
-      $homeController = new HomeController();
-      $homeController->showHome();
-      break;
-   case 'login':
-      $authController = new AuthController();
-      $authController->showFormLogin();
-      break;
-   case 'validate':
-      $authController = new AuthController();
-      $authController->validateUser();
-      break;
-   case 'logout':
-      $authController = new AuthController();
-      $authController->logout();
-      break;
-    case 'filter':
-       $id = $params[1];
-       $homeController = new HomeController();
-       $homeController->filterCategory($id);
-        break;   
+   // case 'login':
+   //    $authController = new AuthController();
+   //    $authController->showFormLogin();
+   //    break;
+   // case 'validate':
+   //    $authController = new AuthController();
+   //    $authController->validateUser();
+   //    break;
+   // case 'logout':
+   //    $authController = new AuthController();
+   //    $authController->logout();
+   //    break;
+   //  case 'filter':
+   //     $id = $params[1];
+   //     $homeController = new HomeController();
+   //     $homeController->filterCategory($id);
+   //      break;   
    case 'showBeers':
       $beerController = new BeerController();
       $beerController->showBeers();
@@ -48,6 +43,11 @@ switch ($params[0]) {
       $beerDescController = new BeerDesc();
       $beerDescController->showBeerDesc();
       break;  
+   case 'detail':
+      $id = $params[1];
+      $beerController = new BeerController();
+      $beerController->showDetail($id); 
+      break;
    case 'addBeer':
       $beerController = new BeerController();
       $beerController->addBeer();

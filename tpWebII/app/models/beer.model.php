@@ -9,7 +9,7 @@ class BeerModel {
         
     }
     public function getAllBeers() {
-        $query = $this->db->prepare("SELECT * FROM beerSale");
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price,beerNameDesc.id_name_fk, beerNameDesc.beer_name, beerNameDesc.abv, beerNameDesc.ibu, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk");
         $query->execute();
         $beers = $query->fetchAll(PDO::FETCH_OBJ);
         return $beers;
@@ -30,7 +30,6 @@ class BeerModel {
         $query->execute([$type, $container, $stock, $price, $beerOption, $pathImg]);
          
          return $this->db->lastInsertId();
-         header("Location: " . BASE_URL. 'showBeers');
      }
      private function uploadImage($image){
         $target = 'images/' . uniqid() . '.jpg';
@@ -41,7 +40,7 @@ class BeerModel {
         
             $query = $this->db->prepare("UPDATE `beerSale` SET type=?, container=?, stock=?, price=?, fk_id_name=? WHERE id=?");
             $query->execute([$type, $container, $stock, $price, $beerOption, $id]);
-            header("Location: " . BASE_URL. 'showBeers');
+            
     }
 
     function deleteBeerById($id) {
@@ -49,6 +48,14 @@ class BeerModel {
          $query->execute([$id]);
          header("Location: " . BASE_URL. 'showBeers');
      }
+    
+     public function getFilter($id){       
+        $query = $this->db->prepare("SELECT * FROM beerSale WHERE fk_id_name = ?"); 
+        $query->execute([$id]);
 
+        
+         $filter = $query->fetchAll(PDO::FETCH_OBJ);
+         return $filter;
+     }
 }
 

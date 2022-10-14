@@ -14,7 +14,7 @@ class BeerController {
         $this->view = new BeerView();
 
         $authHelper = new AuthHelper();
-        $authHelper->checkLoggedIn();
+       // $authHelper->checkLoggedIn();
     }
 
     public function showBeers() {
@@ -22,7 +22,12 @@ class BeerController {
         $beerDesc = $this->modelDesc->getAllBeerDesc();
         $this->view->showBeers($beers, $beerDesc);
 
-    }     
+    }   
+    
+    public function showDetail($id){
+     $detail = $this->modelDesc->getRegisterDescById2($id);
+     $this->view->showDetail($detail);
+    }
 
     function addBeer() {
         if((isset($_POST['type'])&&isset($_POST['container'])&&isset($_POST['stock'])&&isset($_POST['price'])&&isset($_POST['beerOption']))&&!empty($_POST['type'])&&!empty($_POST['container'])&&!empty($_POST['stock'])&&!empty($_POST['price'])&&!empty($_POST['beerOption'])){      
@@ -68,6 +73,15 @@ class BeerController {
      function deleteBeer($id) {
          $this->model->deleteBeerById($id);
      }
+    
+     public function filterCategory($id){
+
+        $name = $this->modelDesc->getNameById($id);
+        $filters = $this->model->getFilter($id);
+        $beerDesc = $this->modelDesc->getAllBeerDesc();
+        $this->view->showFilter($filters, $name, $beerDesc);
+     }
+
 }
 
 

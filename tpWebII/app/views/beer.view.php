@@ -18,4 +18,16 @@ class BeerView {
         $this->smarty->assign('beers', $beers);
         $this->smarty->display('showEditBeers.tpl');
     }
+    function showFilter($filters, $name, $beerDesc){
+        $this->smarty->assign('name', $name); 
+        $this->smarty->assign('filters', $filters);
+        $this->smarty->assign('beerDesc', $beerDesc);
+        $this->smarty->display('filterView.tpl');
+    }
+
+    function showDetail($detail){
+        $this->smarty->assign('detail', $detail);
+        $this->smarty->display('showDetail.tpl');
+    }
+
 } 
