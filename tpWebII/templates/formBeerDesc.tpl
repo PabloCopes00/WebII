@@ -1,3 +1,4 @@
+<h1>Add Form</h1>
 <form action="addBeerDesc" method="POST" class="my-4" enctype="multipart/form-data">
 <div class="mb-3">
   <label for="beer_name" class="form-label">Nombre</label>

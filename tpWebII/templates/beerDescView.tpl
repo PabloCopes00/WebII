@@ -10,6 +10,7 @@
             <th>Descripcion</th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
          </thead>
          <tbody>        
@@ -24,8 +25,8 @@
             <td>{$desc->abv}%</td>
             <td>{$desc->ibu}</td>
             <td>{$desc->description}</td>
+            <td><a href='showEditDesc/{$desc->id_name_fk}' type='button' class='btn btn-danger ml-auto'>Editar</a></td>           
             <td><a href='deleteBeerDesc/{$desc->id_name_fk}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
-            <td><a href='showEditDesc/{$desc->id_name_fk}' type='button' class='btn btn-danger ml-auto'>Editar</a></td>
             </tr>
         {/foreach}
          </tbody>

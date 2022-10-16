@@ -1,4 +1,5 @@
-<form action="addBeer" method="POST" class="my-4" enctype="multipart/form-data">
+<h1>Add Form</h1>
+<form  action="addBeer" method="POST" class="my-4" enctype="multipart/form-data">
 <div class="mb-3">
 <label class="form-label">Seleccione una opcion:</label>
 <select name="beerOption" class="form-control">

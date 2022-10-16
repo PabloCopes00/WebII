@@ -21,18 +21,17 @@
         <img src="{$beer->img}" style="width:3rem;"/>
        {/if}
    </td>
-   <td><a href="detail/{$beer->id_name_fk}" class="text-decoration-none text-dark">{$beer->beer_name}</a></td>
+   <td><a href="detail/{$beer->id_name_fk}" class="text-decoration-none">{$beer->beer_name}</a></td>
    <td>{$beer->type}</td>
    <td>{$beer->container}</td>
    <td>{$beer->stock}</td>
    <td>${$beer->price}</td>
-   <td><a href='deleteBear/{$beer->id}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
    <td><a href='showEdit/{$beer->id}' type='button' class='btn btn-danger ml-auto'>Editar</a></td>
+   <td><a href='deleteBear/{$beer->id}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
    </tr>
 {/foreach}
 </tbody>
 </table>
-<h1>Add Form</h1>
 {include file="formBeer.tpl"}
 {include file="footer.tpl"}
   

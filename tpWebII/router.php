@@ -18,27 +18,27 @@ $params = explode('/', $action);
 
 // tabla de ruteo
 switch ($params[0]) {
-   // case 'login':
-   //    $authController = new AuthController();
-   //    $authController->showFormLogin();
-   //    break;
-   // case 'validate':
-   //    $authController = new AuthController();
-   //    $authController->validateUser();
-   //    break;
-   // case 'logout':
-   //    $authController = new AuthController();
-   //    $authController->logout();
-   //    break;
-   //  case 'filter':
-   //     $id = $params[1];
-   //     $homeController = new HomeController();
-   //     $homeController->filterCategory($id);
-   //      break;   
+    case 'login':
+       $authController = new AuthController();
+       $authController->showFormLogin();
+       break;
+    case 'validate':
+       $authController = new AuthController();
+       $authController->validateUser();
+       break;
+    case 'logout':
+       $authController = new AuthController();
+       $authController->logout();
+       break;
+   case 'filter':
+        $id = $params[1];
+        $beerController = new BeerController();
+        $beerController->filterCategory($id);
+         break;   
    case 'showBeers':
-      $beerController = new BeerController();
-      $beerController->showBeers();
-      break;
+        $beerController = new BeerController();
+        $beerController->showBeers();
+         break;
    case 'beerDesc':
       $beerDescController = new BeerDesc();
       $beerDescController->showBeerDesc();
