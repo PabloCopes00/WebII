@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="app/views/css/style.css" rel="stylesheet">
     <title>RUDA</title>
   </head>
   <body>
     <header>
-    <img src="images/rudanav.jpeg" style="width: 100%; height: 18rem; object-fit:cover;">   
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" Style="margin-bottom: 2rem;">
+    <img src="images/rudanav.jpeg" class="imgNav">   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbarStyle">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarColor01">
-      <img src="images/logo22.png" style="width: 3.5rem;">
+      <img src="images/logo22.png" class="imgNavLogo">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="showBeers">Ventas</a>
@@ -40,10 +41,10 @@
            </div>
         </ul>
           {if !isset($smarty.session.USER_ID)}
-          <a href="login"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Login</button></a>
+          <a href="login"><button class="btn btn-outline-light btnlogin" type="button">Login</button></a>
           {else} 
-          <a href="logout"><button class="btn btn-outline-light" type="button" style="margin: 0 1rem;">Logout</button></a>
-          <span><p style="color:#777777" class="user-select-none">User: {$smarty.session.USER_EMAIL}</p></span>
+          <a href="logout"><button class="btn btn-outline-light btnlogin" type="button">Logout</button></a>
+          <span><p class="user-select-none userSession">User: {$smarty.session.USER_EMAIL}</p></span>
          {/if}  
       </div>
     </div>

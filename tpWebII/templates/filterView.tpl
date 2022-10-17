@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <table class="table">
 <thead class="table-dark">
-  <h1 class="font-monospace fw-bold display-2 text-center" style="margin: 3rem; text-shadow: 1px 1px 2px rgb(59, 59, 59), 0 0 1em rgb(95, 95, 95), 0 0 0.2em rgb(125, 125, 125);">{$name->beer_name}</h1>
+  <h1 class="font-monospace fw-bold display-2 text-center powerTitle">{$name->beer_name}</h1>
   <tr>
    <th></th>
    <th>Tipo</th>
@@ -14,7 +14,7 @@
    <tr>
    <td>
    {if isset($filter->img)}
-    <img src="{$filter->img}" alt="{$filter->beer_name}" style="width:3rem;"/>
+    <img src="{$filter->img}" alt="{$filter->beer_name}" class="imgTable"/>
    {/if}
    </td>
    <td>{$filter->type}</td>

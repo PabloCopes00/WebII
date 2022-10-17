@@ -8,8 +8,10 @@
             <th>Abv</th>
             <th>Ibu</th>
             <th>Descripcion</th>
+            {if isset($smarty.session.USER_ID)}
             <th></th>
             <th></th>
+            {/if}
           </tr>
          </thead>
          <tbody>        
@@ -17,7 +19,7 @@
             <tr>
             <td>
                {if isset($desc->img)}
-                   <img src="{$desc->img}" alt="{$desc->beer_name}" style="width:3rem;"/>
+                   <img src="{$desc->img}" alt="{$desc->beer_name}" class="imgTable"/>
                {/if}
             </td>
             <td>{$desc->beer_name}</td>

@@ -2,7 +2,7 @@
 {foreach from=$detail item=$item}
 <div class="card">
   <div class="card-header">
-    <img src="{$item->img}" alt="{$item->beer_name}" style="width:5rem;">
+    <img src="{$item->img}" alt="{$item->beer_name}" class="imgDetail">
     {$item->beer_name}
     </div>
     <div class="card-body">
