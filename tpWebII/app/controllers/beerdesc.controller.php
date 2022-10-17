@@ -10,10 +10,9 @@ class BeerDesc{
    public function __construct(){
     $this->model = new BeerDescModel();
     $this->view = new BeerDescView();
-    
-    $authHelper = new AuthHelper();
-    //$authHelper->checkLoggedIn();
-
+    if (session_status() != PHP_SESSION_ACTIVE) {
+        session_start();
+    } 
 }
 
 public function showBeerDesc() {
@@ -21,7 +20,9 @@ public function showBeerDesc() {
     $this->view->showBeerDesc($beerDesc);
 }
 function addBeerDesc() {
-    // TODO: validar entrada de datos
+     
+    $authHelper = new AuthHelper();
+    $authHelper->checkLoggedIn();
     
     $beer_name = $_POST['beer_name'];
     $abv = $_POST['abv'];
@@ -41,10 +42,17 @@ function addBeerDesc() {
 
 
 function  showEditBeerDesc($id){
+    $authHelper = new AuthHelper();
+    $authHelper->checkLoggedIn();
+
     $beerDesc = $this->model->getRegisterDescById2($id);
     $this->view->showEditBeerDesc($beerDesc);
 }
+
 function insertEditBeerDesc($id){
+    $authHelper = new AuthHelper();
+    $authHelper->checkLoggedIn();
+
     if((isset($_POST['beer_name'])&&isset($_POST['abv'])&&isset($_POST['ibu'])&&isset($_POST['description'])&&isset($_POST['img']))&&!empty($_POST['beer_name'])&&!empty($_POST['abv'])&&!empty($_POST['ibu'])&&!empty($_POST['description'])&&!empty($_POST['img'])){      
         $beer_name = $_POST['beer_name'];
         $abv = $_POST['abv'];
@@ -57,6 +65,9 @@ function insertEditBeerDesc($id){
     }
 }
 function deleteBeerDesc($id) {
+    $authHelper = new AuthHelper();
+    $authHelper->checkLoggedIn();
+    
     $this->model->deleteBeerById($id);
 }
 }

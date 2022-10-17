@@ -12,9 +12,9 @@ class BeerController {
         $this->model = new BeerModel();
         $this->modelDesc = new BeerDescModel();
         $this->view = new BeerView();
-
-        $authHelper = new AuthHelper();
-       // $authHelper->checkLoggedIn();
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }  
     }
 
     public function showBeers() {
@@ -30,6 +30,8 @@ class BeerController {
     }
 
     function addBeer() {
+        $authHelper = new AuthHelper();
+        $authHelper->checkLoggedIn();
         if((isset($_POST['type'])&&isset($_POST['container'])&&isset($_POST['stock'])&&isset($_POST['price'])&&isset($_POST['beerOption']))&&!empty($_POST['type'])&&!empty($_POST['container'])&&!empty($_POST['stock'])&&!empty($_POST['price'])&&!empty($_POST['beerOption'])){      
             $type = $_POST['type'];
             $beerOption = $_POST['beerOption'];
@@ -50,12 +52,16 @@ class BeerController {
     }
 
     function  showEditBeer($id){
+        $authHelper = new AuthHelper();
+        $authHelper->checkLoggedIn();
             $beers = $this->model->getRegisterById($id);
             $beerDesc = $this->modelDesc->getRegisterDescById($id);
             $this->view->showEditBeers($beers, $beerDesc);
     }
 
     function insertEditBeer($id){
+        $authHelper = new AuthHelper();
+        $authHelper->checkLoggedIn();
         if((isset($_POST['type'])&&isset($_POST['container'])&&isset($_POST['stock'])&&isset($_POST['price'])&&isset($_POST['beerOption']))&&!empty($_POST['type'])&&!empty($_POST['container'])&&!empty($_POST['stock'])&&!empty($_POST['price'])&&!empty($_POST['beerOption'])){      
             $type = $_POST['type'];
             $beerOption = $_POST['beerOption'];
@@ -71,11 +77,12 @@ class BeerController {
     }
      // borrar el registro del id seleccionado (boton)
      function deleteBeer($id) {
-         $this->model->deleteBeerById($id);
+        $authHelper = new AuthHelper();
+        $authHelper->checkLoggedIn();
+        $this->model->deleteBeerById($id);
      }
     
      public function filterCategory($id){
-
         $name = $this->modelDesc->getNameById($id);
         $filters = $this->model->getFilter($id);
         $beerDesc = $this->modelDesc->getAllBeerDesc();

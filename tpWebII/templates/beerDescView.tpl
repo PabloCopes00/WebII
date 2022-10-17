@@ -10,7 +10,6 @@
             <th>Descripcion</th>
             <th></th>
             <th></th>
-            <th></th>
           </tr>
          </thead>
          <tbody>        
@@ -25,11 +24,15 @@
             <td>{$desc->abv}%</td>
             <td>{$desc->ibu}</td>
             <td>{$desc->description}</td>
-            <td><a href='showEditDesc/{$desc->id_name_fk}' type='button' class='btn btn-danger ml-auto'>Editar</a></td>           
+            {if isset($smarty.session.USER_ID)}
+            <td><a href='showEditDesc/{$desc->id_name_fk}' type='button' class='btn btn-success ml-auto'>Editar</a></td>           
             <td><a href='deleteBeerDesc/{$desc->id_name_fk}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
+            {/if}
             </tr>
         {/foreach}
          </tbody>
     </table>
+{if isset($smarty.session.USER_ID)}
 {include file="formBeerDesc.tpl"}
+{/if}
 {include file="footer.tpl"}
