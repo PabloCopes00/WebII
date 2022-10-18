@@ -2,7 +2,7 @@
     margin-bottom: 2rem;
 }
 .imgNav{
-    width: 100%; 
+    width: 100%;
     height: 18rem; 
     object-fit:cover;
 }
@@ -11,7 +11,7 @@
 }
 
 .btnlogin{
-    margin: 0 1rem;
+    margin: 0 2rem;
 }
 .userSession{ 
     color:#777777;

@@ -51,10 +51,10 @@ class BeerDescModel {
         return $target;
     }
 
-    public function insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id){
+    public function insertEditBeerDesc($beer_name, $abv, $ibu, $description, $id){
         
-        $query = $this->db->prepare("UPDATE `beerNameDesc` SET beer_name=?, abv=?, ibu=?, description=?, img=? WHERE id_name_fk=?");
-        $query->execute([$beer_name, $abv, $ibu, $description, $img, $id]);
+        $query = $this->db->prepare("UPDATE `beerNameDesc` SET beer_name=?, abv=?, ibu=?, description=? WHERE id_name_fk=?");
+        $query->execute([$beer_name, $abv, $ibu, $description, $id]);
     }
 
      function deleteBeerById($id) {

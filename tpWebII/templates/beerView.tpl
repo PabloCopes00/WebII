@@ -29,7 +29,7 @@
    <td>${$beer->price}</td>
    {if isset($smarty.session.USER_ID)}
    <td><a href='showEdit/{$beer->id}' type='button' class='btn btn-success ml-auto'>Editar</a></td>
-   <td><a href='deleteBear/{$beer->id}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
+   <td><a href='deleteBeer/{$beer->id}' type='button' class='btn btn-danger ml-auto'>Borrar</a></td>
    {/if}
    </tr>
 {/foreach}

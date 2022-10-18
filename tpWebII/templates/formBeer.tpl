@@ -24,9 +24,9 @@
   <label for="price" class="form-label">Precio</label>
   <input type="text" class="form-control"  name="price">  
   </div>
-  <div class="mb-3">
+  {* <div class="mb-3">
     <input type="file" class="form-control" name="input_name" id="imageToUpload">
-  </div>
+  </div> *}
   <button type="submit" class="btn btn-primary mt-2">Guardar</button> 
 </form>
 

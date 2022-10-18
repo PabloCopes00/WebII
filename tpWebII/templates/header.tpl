@@ -43,8 +43,8 @@
           {if !isset($smarty.session.USER_ID)}
           <a href="login"><button class="btn btn-outline-light btnlogin" type="button">Login</button></a>
           {else} 
+          <span><p class="user-select-none userSession">User:{$smarty.session.USER_EMAIL}</p></span>
           <a href="logout"><button class="btn btn-outline-light btnlogin" type="button">Logout</button></a>
-          <span><p class="user-select-none userSession">User: {$smarty.session.USER_EMAIL}</p></span>
          {/if}  
       </div>
     </div>

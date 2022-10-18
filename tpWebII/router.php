@@ -81,7 +81,7 @@ switch ($params[0]) {
        $beerDescController = new BeerDesc();
        $beerDescController->deleteBeerDesc($id);  
        break;
-   case 'deleteBear':
+   case 'deleteBeer':
       $id = $params[1];
       $beerController = new BeerController();
       $beerController->deleteBeer($id);  

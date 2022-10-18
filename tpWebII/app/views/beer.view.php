@@ -25,7 +25,8 @@ class BeerView {
         $this->smarty->display('filterView.tpl');
     }
 
-    function showDetail($detail){
+    function showDetail($detail, $beerDesc){
+        $this->smarty->assign('beerDesc', $beerDesc);
         $this->smarty->assign('detail', $detail);
         $this->smarty->display('showDetail.tpl');
     }

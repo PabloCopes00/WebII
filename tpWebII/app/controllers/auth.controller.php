@@ -16,6 +16,7 @@ class AuthController {
     }
 
     public function validateUser() {
+        
         $email = $_POST['email'];
         $password = $_POST['password'];
         $user = $this->model->getUserByEmail($email);

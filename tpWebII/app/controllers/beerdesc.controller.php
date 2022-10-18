@@ -12,15 +12,15 @@ class BeerDesc{
     $this->view = new BeerDescView();
     if (session_status() != PHP_SESSION_ACTIVE) {
         session_start();
-    } 
+    }  
 }
 
 public function showBeerDesc() {
+
     $beerDesc = $this->model->getAllBeerDesc();
     $this->view->showBeerDesc($beerDesc);
 }
 function addBeerDesc() {
-     
     $authHelper = new AuthHelper();
     $authHelper->checkLoggedIn();
     
@@ -53,21 +53,19 @@ function insertEditBeerDesc($id){
     $authHelper = new AuthHelper();
     $authHelper->checkLoggedIn();
 
-    if((isset($_POST['beer_name'])&&isset($_POST['abv'])&&isset($_POST['ibu'])&&isset($_POST['description'])&&isset($_POST['img']))&&!empty($_POST['beer_name'])&&!empty($_POST['abv'])&&!empty($_POST['ibu'])&&!empty($_POST['description'])&&!empty($_POST['img'])){      
+    if((isset($_POST['beer_name'])&&isset($_POST['abv'])&&isset($_POST['ibu'])&&isset($_POST['description']))&&(!empty($_POST['beer_name'])&&!empty($_POST['abv'])&&!empty($_POST['ibu'])&&!empty($_POST['description']))){      
         $beer_name = $_POST['beer_name'];
         $abv = $_POST['abv'];
         $ibu = $_POST['ibu'];
         $description = $_POST['description'];
-        $img = $_POST['img'];
 
-        $this->model->insertEditBeerDesc($beer_name, $abv, $ibu, $description, $img, $id);
+        $this->model->insertEditBeerDesc($beer_name, $abv, $ibu, $description, $id);
         header("Location: " . BASE_URL. 'beerDesc');
     }
 }
 function deleteBeerDesc($id) {
     $authHelper = new AuthHelper();
     $authHelper->checkLoggedIn();
-    
     $this->model->deleteBeerById($id);
 }
 }

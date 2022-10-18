@@ -9,7 +9,7 @@ class BeerModel {
         
     }
     public function getAllBeers() {
-        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price,beerNameDesc.id_name_fk, beerNameDesc.beer_name, beerNameDesc.abv, beerNameDesc.ibu, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk");
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price,beerNameDesc.id_name_fk, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk");
         $query->execute();
         $beers = $query->fetchAll(PDO::FETCH_OBJ);
         return $beers;

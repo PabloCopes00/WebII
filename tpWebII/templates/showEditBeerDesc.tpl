@@ -39,11 +39,7 @@
   <input type="text" class="form-control"  name="ibu" value="{$beer->ibu}">
 </div>
 <div class="mb-3">
-  <label for="img" class="form-label">Img</label>
-<input type="text" class="form-control"  name="img" value="{$beer->img}">
-</div>
-<div class="mb-3">
-  <textarea name="description" id="" cols="30" rows="10">{$beer->description}</textarea>
+  <textarea name="description" id="" cols="80" rows="10">{$beer->description}</textarea>
 </div>
 {/foreach}
   <button type="submit" class="btn btn-primary mt-2">Editar</button> 
