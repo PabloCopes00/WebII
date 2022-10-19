@@ -15,8 +15,8 @@ class BeerModel {
         return $beers;
     }
     public function getRegisterById($id){
-        $query = $this->db->prepare("SELECT * FROM beerSale where `id`=$id");
-        $query->execute();
+        $query = $this->db->prepare("SELECT * FROM beerSale where `id`=?");
+        $query->execute([$id]);
         $beerRegister = $query->fetchAll(PDO::FETCH_OBJ);
         return $beerRegister;
     }

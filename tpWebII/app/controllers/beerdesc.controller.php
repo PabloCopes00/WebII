@@ -45,7 +45,7 @@ function  showEditBeerDesc($id){
     $authHelper = new AuthHelper();
     $authHelper->checkLoggedIn();
 
-    $beerDesc = $this->model->getRegisterDescById2($id);
+    $beerDesc = $this->model->getRegisterDescById($id);
     $this->view->showEditBeerDesc($beerDesc);
 }
 

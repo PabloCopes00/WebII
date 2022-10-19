@@ -26,7 +26,7 @@ class BeerController {
     
     public function showDetail($id){
      $beerDesc = $this->modelDesc->getAllBeerDesc();
-     $detail = $this->modelDesc->getRegisterDescById2($id);
+     $detail = $this->modelDesc->getRegisterDescById($id);
      $this->view->showDetail($detail, $beerDesc);
     }
 
@@ -60,7 +60,7 @@ class BeerController {
         $authHelper->checkLoggedIn();
 
         $beers = $this->model->getRegisterById($id);
-        $beerDesc = $this->modelDesc->getRegisterDescById($id);
+        $beerDesc = $this->modelDesc->getAllBeerDesc();
         $this->view->showEditBeers($beers, $beerDesc);
     }
 

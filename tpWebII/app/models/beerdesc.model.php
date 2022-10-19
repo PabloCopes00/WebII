@@ -22,15 +22,10 @@ class BeerDescModel {
         $name = $query->fetch(PDO::FETCH_OBJ);
         return $name;
     }
+
     public function getRegisterDescById($id){
-        $query = $this->db->prepare("SELECT * FROM beerNameDesc");
-        $query->execute();
-        $beerDescRegister = $query->fetchAll(PDO::FETCH_OBJ);
-        return $beerDescRegister;
-    }
-    public function getRegisterDescById2($id){
-        $query = $this->db->prepare("SELECT * FROM beerNameDesc where `id_name_fk`=$id");
-        $query->execute();
+        $query = $this->db->prepare("SELECT * FROM beerNameDesc where `id_name_fk`=?");
+        $query->execute([$id]);
         $beerRegister = $query->fetchAll(PDO::FETCH_OBJ);
         return $beerRegister;
     }
