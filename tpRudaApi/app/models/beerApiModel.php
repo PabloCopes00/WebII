@@ -33,14 +33,11 @@ class BeerApiModel {
         $query->execute([$id]);
     }
      
-    // public function update($type, $container, $stock, $price, $beerOption, $id){
+     public function update($id, $beerOption, $type, $container, $stock, $price){
         
-    //         $query = $this->db->prepare("UPDATE `beerSale` SET type=?, container=?, stock=?, price=?, fk_id_name=? WHERE id=?");
-    //         $query->execute([$type, $container, $stock, $price, $beerOption, $id]);
-            
-    // }
-
-
+             $query = $this->db->prepare("UPDATE `beerSale` SET type=?, container=?, stock=?, price=?, fk_id_name=? WHERE id=?");
+             $query->execute([$type, $container, $stock, $price, $beerOption, $id]);            
+    }
 }
 
 
