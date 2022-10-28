@@ -39,7 +39,8 @@ class BeerApiController {
             $this->view->response("Complete los datos", 400);
         } else {
             $id = $this->model->save($data->fk_id_name, $data->type, $data->container, $data->stock, $data->price);
-            $this->view->response("La cerveza se insertó con éxito con el id=$id", 201);
+            $beer = $this->model->getById($id);
+            $this->view->response($beer, 201);
         }
     }
 
@@ -47,13 +48,14 @@ class BeerApiController {
         $id = $params[':ID'];
         $data = $this->getData();
         $beer = $this->model->get($id);
-        
         if ($beer) {
             $this->model->update($id, $data->fk_id_name, $data->type, $data->container, $data->stock, $data->price);
-            $this->view->response("La cerveza fue modificada con exito.", 200);
+            $beerupd = $this->model->getById($id);
+            $this->view->response($beerupd, 200);
         } else
             $this->view->response("La cerveza con el id=$id no existe", 404);
     }
+
     public function deleteBeer($params = null) {
         $id = $params[':ID'];
         $beer = $this->model->getById($id);

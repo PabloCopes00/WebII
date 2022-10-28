@@ -1,10 +1,10 @@
 "use strict";
 
-const URL = "http://localhost/tpRudaApi/api/beers/";
+const URL = "api/beers/";
 
 let form = document.querySelector('#beer-form');
 form.addEventListener('submit', insertBeer)
-
+let beers = [];
 
 /**
  * obtengo toda la lista de cervezas de la API REST.
@@ -15,8 +15,8 @@ async function getAll() {
         if (!response.ok) {
             throw new error('Recurso no existe');
         }
-        let beers = await response.json();
-        showBeers(beers);
+        beers = await response.json();
+        showBeers();
     } catch (e) {
         console.log(e);
     }
@@ -24,7 +24,7 @@ async function getAll() {
 /**
  * muestro toda la lista de cervezas de la API REST.
  */
-function showBeers(beers) {
+function showBeers() {
     let tbody = document.querySelector("#beer-list");
     tbody.innerHTML = "";
     for (const beer of beers) {
@@ -70,7 +70,9 @@ async function insertBeer(e) {
             throw new error('Recurso no existe');
         }
         form.reset();
-        getAll();
+        let newBeer = await response.json();
+        beers.push(newBeer);
+        showBeers();
 
     } catch (e) {
         console.log(e);
@@ -83,11 +85,12 @@ async function deleteBeer(e) {
     e.preventDefault();
     try {
         let id = e.target.dataset.beer;
-        let response = await fetch(URL + id, {method: 'DELETE'});
+        let response = await fetch(URL + id, { method: 'DELETE' });
         if (!response.ok) {
             throw new error('Recurso no existe');
         }
-        getAll();
+        beers = beers.filter(beer => beer.id != id);
+        showBeers();
 
     } catch (e) {
         console.log(e);
