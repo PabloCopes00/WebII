@@ -38,6 +38,13 @@ class BeerApiModel {
              $query = $this->db->prepare("UPDATE `beerSale` SET type=?, container=?, stock=?, price=?, fk_id_name=? WHERE id=?");
              $query->execute([$type, $container, $stock, $price, $beerOption, $id]);            
     }
+
+    public function order($order, $sort){
+        $query = $this->db->prepare("SELECT * FROM `beerSale` ORDER BY `$sort` $order");
+        $query->execute();
+        $ordered = $query->fetchAll(PDO::FETCH_OBJ);
+        return $ordered;
+    }
 }
 
 

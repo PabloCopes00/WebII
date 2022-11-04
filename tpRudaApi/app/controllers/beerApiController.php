@@ -65,4 +65,22 @@ class BeerApiController {
         } else
             $this->view->response("La cerveza con el id=$id no existe", 404);
     }
+
+    /**
+     * Sort by & Order Asc or Desc
+     */
+    public function getOrdered($params = null){
+        // hacer la verificacion para no meter porquerias en la BBDD
+        $order = $_GET['order']; // ordenamiento de las cervezas ascendente o descendente
+        $sort = $_GET['sort']; // ordenamiento por clasificacion
+       
+        if ($sort == null){
+            $sort = 'id';
+        }
+        if ($order == null){
+            $order == 'desc';
+        }    
+            $orderedList = $this->model->order($order, $sort);
+            $this->view->response($orderedList, 200);
+    }
 }

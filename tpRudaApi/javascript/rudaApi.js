@@ -21,6 +21,7 @@ async function getAll() {
         console.log(e);
     }
 }
+/* <td><a href='showEdit/${beer.id}' type='button' class='btn btn-success ml-auto'>Editar</a></td>  */
 /**
  * muestro toda la lista de cervezas de la API REST.
  */
@@ -34,7 +35,6 @@ function showBeers() {
         <td>${beer.container}</td>
         <td>${beer.stock}</td>
         <td>${beer.price}</td>
-        <td><a href='showEdit/${beer.id}' type='button' class='btn btn-success ml-auto'>Editar</a></td>
         <td><a href='#' data-beer="${beer.id}" type='button' class='btn btn-danger ml-auto btn-delete'>Borrar</a></td>
         </tr>`;
         tbody.innerHTML += html;
