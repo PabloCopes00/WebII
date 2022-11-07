@@ -11,13 +11,13 @@ class BeerApiModel {
     public function get($id) { 
         //si hay ID muestro la cerveza, sino mando todas.
         if ($id != null){
-            $query = $this->db->prepare("SELECT * FROM beerSale where `id`=?");
+            $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk WHERE `id` = ? ");
             $query->execute([$id]);
             $beer = $query->fetch(PDO::FETCH_OBJ);
             return $beer;
         }
         else{
-            $query = $this->db->prepare("SELECT * FROM beerSale");
+            $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk");
             $query->execute();
             $beers = $query->fetchAll(PDO::FETCH_OBJ);
             return $beers;
@@ -42,7 +42,7 @@ class BeerApiModel {
     }
 
     public function order($order, $sort){
-        $query = $this->db->prepare("SELECT * FROM `beerSale` ORDER BY `$sort` $order");
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk ORDER BY `$sort` $order");
         $query->execute();
         $ordered = $query->fetchAll(PDO::FETCH_OBJ);
         return $ordered;
