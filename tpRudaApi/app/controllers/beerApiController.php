@@ -1,16 +1,19 @@
 <?php
 require_once './app/models/beerApiModel.php';
 require_once './app/views/beerApiView.php';
+require_once './app/helpers/authApiHelper.php';
 
 class BeerApiController {
 
     private $model;
     private $view;
     private $data;
+    private $authHelper;
 
     public function __construct() {
         $this->model = new BeerApiModel();
         $this->view = new BeerApiView();
+        $this->authHelper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
     }
 
@@ -75,6 +78,12 @@ class BeerApiController {
     }
 
     public function deleteBeer($params = null) {
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
+        
         $id = $params[':ID'];
         $beer = $this->model->get($id);
         if ($beer) {
