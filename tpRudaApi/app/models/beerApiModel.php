@@ -23,6 +23,14 @@ class BeerApiModel {
             return $beers;
         }
     }
+
+    public function getLimit($actLimit){
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $actLimit");
+            $query->execute();
+            $beerLimit = $query->fetchAll(PDO::FETCH_OBJ);
+            return $beerLimit;
+
+    }
     
     function save($beerOption, $type, $container, $stock, $price) { 
         $query = $this->db->prepare("INSERT INTO beerSale (fk_id_name, type, container, stock, price) VALUES (?, ?, ?, ?, ?)");

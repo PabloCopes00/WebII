@@ -22,20 +22,36 @@ class BeerApiController {
     }
 
     public function  getBeers($params = null) {
+         
+                // PAGINATION
+        if (!empty($_GET['page'])){  
+            $page =  htmlentities($_GET['page']);
+            $limit = htmlentities($_GET['limit']); // esto podria sacarse y dejar uno por defecto.
+            
+            if($limit == null){
+                $limit = 4;
+            }      
+            $inicio = ((int)$page - 1) * (int)$limit;  
+            $actLimit = "LIMIT $inicio,$limit";
+            $beerPagination = $this->model->getLimit($actLimit);
+            $this->view->response($beerPagination, 200);
+                die();
+        }
+                // SORT & ORDER
         if (!empty($_GET['sort']) || !empty($_GET['order'])){
             $sort = htmlentities($_GET['sort']); // ordenamiento por clasificacion
             $order = htmlentities($_GET['order']) ; // ordenamiento de las cervezas ascendente o descendente
             if ($sort == null){
-                $sort = 'id';
+                $sort = 'id';    // funciona pero tira error de q no conoce el array linea 42.
             }
             if ($order == null){
-                $order = 'desc';
+                $order = 'asc';
             }    
                 $orderedList = $this->model->order($order, $sort);
                 $this->view->response($orderedList, 200);
                 die();
         }
-
+                // GET ID 
         if ($params != null){
             $id = $params[':ID'];
             $beer = $this->model->get($id);
@@ -45,8 +61,8 @@ class BeerApiController {
             else{
                 $this->view->response("La cerveza con el id $id no existe", 404);
             }
-        }    
-        else{
+        } 
+        else{   /** GET ALL */
             $id = $params;
             $beers = $this->model->get($id);
             $this->view->response($beers, 200);
