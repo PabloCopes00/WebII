@@ -21,8 +21,16 @@ class BeerApiController {
         return json_decode($this->data);
     }
 
-    public function  getBeers($params = null) {
-         
+    public function  getBeers($params = null) {    
+                //filter
+        if(!empty($_GET['field']) && !empty($_GET['data'])){
+            $field =  htmlentities($_GET['field']);
+            $data = htmlentities($_GET['data']);
+            $dataField = "WHERE $field = '$data'";
+            $beerFilter = $this->model->getLimit($dataField);
+            $this->view->response($beerFilter, 200);
+            die();
+        }    
                 // PAGINATION
         if (!empty($_GET['page'])){  
             $page =  htmlentities($_GET['page']);
