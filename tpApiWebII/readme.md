@@ -47,4 +47,8 @@ SORT & ORDER
         ej: localhost/tpRudaApi/api/beers?sort=id&order=desc (ASC/DESC)
 
 
+?field=type&data=Rubia&sort=id&order=asc&page=2&limit=4
+par usar el fieltro se debe poner  'field' (una columna) y data (algo que este dentro de la base de datos)
+a eso podemos agregarle ordenarlo por coluna y orden (asc o desc)
+a eso le podemos sumar que se pagine con una pagina y un limite, o solo por pagina y por defecto sera 3 el limite.
 
