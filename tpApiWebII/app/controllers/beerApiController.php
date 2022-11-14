@@ -3,81 +3,97 @@ require_once './app/models/beerApiModel.php';
 require_once './app/views/beerApiView.php';
 require_once './app/helpers/authApiHelper.php';
 
-class BeerApiController {
+class BeerApiController
+{
 
     private $model;
     private $view;
     private $data;
     private $authHelper;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new BeerApiModel();
         $this->view = new BeerApiView();
         $this->authHelper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
     }
 
-    private function getData() {
+    private function getData()
+    {
         return json_decode($this->data);
     }
 
-    public function  getBeers($params = null) {    
-                //filter
-        if(!empty($_GET['field']) && !empty($_GET['data'])){
-            $field =  htmlentities($_GET['field']);
-            $data = htmlentities($_GET['data']);
-            $dataField = "WHERE $field = '$data'";
-            $beerFilter = $this->model->getLimit($dataField);
-            $this->view->response($beerFilter, 200);
-            die();
-        }    
-                // PAGINATION
-        if (!empty($_GET['page'])){  
-            $page =  htmlentities($_GET['page']);
-            $limit = htmlentities($_GET['limit']); // esto podria sacarse y dejar uno por defecto.
-            
-            if($limit == null){
-                $limit = 4;
-            }      
-            $inicio = ((int)$page - 1) * (int)$limit;  
-            $actLimit = "LIMIT $inicio,$limit";
-            $beerPagination = $this->model->getLimit($actLimit);
-            $this->view->response($beerPagination, 200);
-                die();
-        }
-                // SORT & ORDER
-        if (!empty($_GET['sort']) || !empty($_GET['order'])){
-            $sort = htmlentities($_GET['sort']); // ordenamiento por clasificacion
-            $order = htmlentities($_GET['order']) ; // ordenamiento de las cervezas ascendente o descendente
-            if ($sort == null){
-                $sort = 'id';    // funciona pero tira error de q no conoce el array linea 42.
+    public function  getBeers($params = null)
+    {
+        $getWLorder = ['asc', 'desc'];
+        $getWLsort = ['id', 'beer_name', 'type', 'container', 'stock', 'price'];
+        $query = null;
+        // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 1,2
+        if (isset($_GET['field'])) {
+            if ((isset($_GET['field']) && isset($_GET['data'])) && ((in_array($_GET['field'],             $getWLsort) && $_GET['data']))) {
+                $data = $_GET['data'];
+                $field = $_GET['field'];
+                $query = "WHERE $field = ? ";
+                if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
+                    if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
+                        $sort = $_GET['sort'];
+                        $order = $_GET['order'];
+                    }
+                    $query .= " ORDER BY $sort $order";
+                    $ListOrdered = $this->model->getFilOrdered($query, $data);
+                    $this->view->response($ListOrdered, 200);
+                } else {
+                    if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
+                        $sort = $_GET['sort'];
+                        $order = $_GET['order'];
+                        $query .= " ORDER BY $sort $order";
+                    }
+                        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                            $page = $_GET['page'];
+                            if(isset($_GET['limit'])){
+                                if(is_numeric($_GET['limit']))
+                                    $limit = $_GET['limit'];                   
+                            }
+                            else {
+                                    $limit = 3;
+                                }       
+                            $inicio = ((int)$page - 1) * (int)$limit;                                                 
+                            $query .= " LIMIT $inicio,$limit";
+                            $ListOrdered = $this->model->getFilOrdered($query, $data);
+                            $this->view->response($ListOrdered, 200);
+                        } 
+                        else {
+                            $ListOrdered = $this->model->getFilOrdered($query, $data);
+                            $this->view->response($ListOrdered, 200);
+                        }
+                    }
+                }
             }
-            if ($order == null){
-                $order = 'asc';
+        else {
+            // GET ID 
+            if ($params != null) {
+                $id = $params[':ID'];
+                $beer = $this->model->get($id);
+                if ($beer) {
+                    $this->view->response($beer, 200);
+                } 
+                else {
+                    $this->view->response("La cerveza con el id $id no existe", 404);
+                }
             }    
-                $orderedList = $this->model->order($order, $sort);
-                $this->view->response($orderedList, 200);
-                die();
-        }
-                // GET ID 
-        if ($params != null){
-            $id = $params[':ID'];
-            $beer = $this->model->get($id);
-            if ($beer){
-                $this->view->response($beer, 200);
+            else {
+                /** GET ALL */
+                $id = $params;
+                $beers = $this->model->get($id);
+                $this->view->response($beers, 200);
             }
-            else{
-                $this->view->response("La cerveza con el id $id no existe", 404);
-            }
-        } 
-        else{   /** GET ALL */
-            $id = $params;
-            $beers = $this->model->get($id);
-            $this->view->response($beers, 200);
-        }
-    }   
+    }
+}
 
-    public function addBeer($params = null) {
+    
+    public function addBeer($params = null)
+    {
         $data = $this->getData();
 
         if (empty($data->fk_id_name) || empty($data->type) || empty($data->container) || empty($data->stock) || empty($data->price)) {
@@ -89,7 +105,8 @@ class BeerApiController {
         }
     }
 
-    public function updateBeer($params = null) {
+    public function updateBeer($params = null)
+    {
         $id = $params[':ID'];
         $data = $this->getData();
         $beer = $this->model->get($id);
@@ -101,13 +118,14 @@ class BeerApiController {
             $this->view->response("La cerveza con el id $id no existe", 404);
     }
 
-    public function deleteBeer($params = null) {
+    public function deleteBeer($params = null)
+    {
 
-        if(!$this->authHelper->isLoggedIn()){
+        if (!$this->authHelper->isLoggedIn()) {
             $this->view->response("No estas logeado", 401);
             return;
         }
-        
+
         $id = $params[':ID'];
         $beer = $this->model->get($id);
         if ($beer) {

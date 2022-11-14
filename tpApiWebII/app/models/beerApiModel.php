@@ -23,15 +23,6 @@ class BeerApiModel {
             return $beers;
         }
     }
-
-    public function getLimit($actLimit){
-        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $actLimit");
-            $query->execute();
-            $beerLimit = $query->fetchAll(PDO::FETCH_OBJ);
-            return $beerLimit;
-
-    }
-    
     function save($beerOption, $type, $container, $stock, $price) { 
         $query = $this->db->prepare("INSERT INTO beerSale (fk_id_name, type, container, stock, price) VALUES (?, ?, ?, ?, ?)");
         $query->execute([$beerOption, $type, $container, $stock, $price]);
@@ -49,18 +40,18 @@ class BeerApiModel {
              $query->execute([$type, $container, $stock, $price, $beerOption, $id]);            
     }
 
-    public function order($order, $sort){
-        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk ORDER BY `$sort` $order");
-        $query->execute();
-        $ordered = $query->fetchAll(PDO::FETCH_OBJ);
-        return $ordered;
+    public function getFilOrdered($query, $data){   
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $query ");
+            $query->execute([$data]);
+            $beerFilOrdered = $query->fetchAll(PDO::FETCH_OBJ);
+            return $beerFilOrdered;
     }
-    public function getFilter($dataField){       
-        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $dataField"); 
-        $query->execute();        
-         $filter = $query->fetchAll(PDO::FETCH_OBJ);
-         return $filter;
-     }
+    public function getOrdered($sort, $order){
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $sort $order");
+            $query->execute();
+            $beerOrdered = $query->fetchAll(PDO::FETCH_OBJ);
+            return $beerOrdered;
+    }
 }
 
 
