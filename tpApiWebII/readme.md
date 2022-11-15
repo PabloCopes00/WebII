@@ -61,5 +61,3 @@ SORT & ORDER
     localhost/tpRudaApi/api/beers?sort=id&order=asc?&page=1 (por defecto limite 3)
     localhost/tpRudaApi/api/beers?sort=id&order=asc?&page=1&limit=4
 
-    FIN
-

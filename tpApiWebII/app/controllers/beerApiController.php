@@ -24,28 +24,27 @@ class BeerApiController
         return json_decode($this->data);
     }
 
-    public function  getBeers($params = null)
-    {
+    public function  getBeers($params = null){
         $getWLorder = ['asc', 'desc'];
         $getWLsort = ['id', 'beer_name', 'type', 'container', 'stock', 'price'];
         $query = null;
         // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 1,2
         if (isset($_GET['field']) && isset($_GET['data'])) {
-            if ((isset($_GET['field']) && isset($_GET['data'])) && ((in_array($_GET['field'],$getWLsort) && $_GET['data']))) {
-                $data = $_GET['data'];
-                $field = $_GET['field'];
-                $query = "WHERE $field = ? ";
-                if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
+            if (in_array($_GET['field'],$getWLsort)){
+                $data = ucwords($_GET['data']);
+                $field = $_GET['field'];  
+            }
+            $query = "WHERE $field = ? ";
+
+            if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
                     if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
                         $sort = $_GET['sort'];
                         $order = $_GET['order'];
                     }
                     $query .= " ORDER BY $sort $order";
-                    $ListOrdered = $this->model->getFilOrdered($query, $data);
-                    $this->view->response($ListOrdered, 200);
-                    } 
-                else {
-                    if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
+                    
+                } 
+            else if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'],$getWLorder)) {
                         $sort = $_GET['sort'];
                         $order = $_GET['order'];
                         $query .= " ORDER BY $sort $order";
@@ -61,16 +60,14 @@ class BeerApiController
                                 }       
                             $inicio = ((int)$page - 1) * (int)$limit;                                                 
                             $query .= " LIMIT $inicio,$limit";
-                            $ListOrdered = $this->model->getOrdered($query);
+                            $ListOrdered = $this->model->getFilOrdered($query, $data);
                             $this->view->response($ListOrdered, 200);
                         } 
                         else {
-                            $ListOrdered = $this->model->getOrdered($query);
+                            $ListOrdered = $this->model->getFilOrdered($query, $data);
                             $this->view->response($ListOrdered, 200);
                         }
-                    }
                 }
-            }
         else if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
                 if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
                     $sort = $_GET['sort'];
