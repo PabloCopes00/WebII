@@ -24,113 +24,101 @@ class BeerApiController
         return json_decode($this->data);
     }
 
-    public function  getBeers($params = null){
+    public function  getBeers($params = null)
+    {
         $getWLorder = ['asc', 'desc'];
         $getWLsort = ['id', 'beer_name', 'type', 'container', 'stock', 'price'];
         $query = null;
         // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 1,2
         if (isset($_GET['field']) && isset($_GET['data'])) {
-            if (in_array($_GET['field'],$getWLsort)){
+            if (in_array($_GET['field'], $getWLsort)) {
                 $data = ucwords($_GET['data']);
-                $field = $_GET['field'];  
+                $field = $_GET['field'];
             }
             $query = "WHERE $field = ? ";
 
             if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
-                    if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
-                        $sort = $_GET['sort'];
-                        $order = $_GET['order'];
-                    }
-                    $query .= " ORDER BY $sort $order";
-                    
-                } 
-            else if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'],$getWLorder)) {
-                        $sort = $_GET['sort'];
-                        $order = $_GET['order'];
-                        $query .= " ORDER BY $sort $order";
-                    }
-                        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-                            $page = $_GET['page'];
-                            if(isset($_GET['limit'])){
-                                if(is_numeric($_GET['limit']))
-                                    $limit = $_GET['limit'];                   
-                            }
-                            else {
-                                    $limit = 3;
-                                }       
-                            $inicio = ((int)$page - 1) * (int)$limit;                                                 
-                            $query .= " LIMIT $inicio,$limit";
-                            $ListOrdered = $this->model->getFilOrdered($query, $data);
-                            $this->view->response($ListOrdered, 200);
-                        } 
-                        else {
-                            $ListOrdered = $this->model->getFilOrdered($query, $data);
-                            $this->view->response($ListOrdered, 200);
-                        }
-                }
-        else if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
                 if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
                     $sort = $_GET['sort'];
                     $order = $_GET['order'];
                 }
-                else{
-                    $this->view->response("esa palabra no existe en la WL", 404); 
-                }
                 $query .= " ORDER BY $sort $order";
+            } else if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
+                $sort = $_GET['sort'];
+                $order = $_GET['order'];
+                $query .= " ORDER BY $sort $order";
+            }
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $page = $_GET['page'];
+                if (isset($_GET['limit'])) {
+                    if (is_numeric($_GET['limit']))
+                        $limit = $_GET['limit'];
+                } else {
+                    $limit = 3;
+                }
+                $inicio = ((int)$page - 1) * (int)$limit;
+                $query .= " LIMIT $inicio,$limit";
+                $ListOrdered = $this->model->getFilOrdered($query, $data);
+                $this->view->response($ListOrdered, 200);
+            } else {
+                $ListOrdered = $this->model->getFilOrdered($query, $data);
+                $this->view->response($ListOrdered, 200);
+            }
+        } else if (isset($_GET['sort']) && isset($_GET['order']) && empty($_GET['page'])) {
+            if (in_array($_GET['sort'], $getWLsort) && (in_array($_GET['order'], $getWLorder))) {
+                $sort = $_GET['sort'];
+                $order = $_GET['order'];
+            } else {
+                $this->view->response("esa palabra no existe en la WL", 404);
+            }
+            $query .= " ORDER BY $sort $order";
+            $data = " ";
+            $ListOrdered = $this->model->getOrdered($query);
+            $this->view->response($ListOrdered, 200);
+        } else if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
+            if (in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
+                $sort = $_GET['sort'];
+                $order = $_GET['order'];
+                $query .= " ORDER BY $sort $order";
+            } else {
+                $this->view->response("esa palabra no existe en la WL", 404);
+            }
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $page = $_GET['page'];
+                if (isset($_GET['limit'])) {
+                    if (is_numeric($_GET['limit']))
+                        $limit = $_GET['limit'];
+                } else {
+                    $limit = 3;
+                }
+                $inicio = ((int)$page - 1) * (int)$limit;
+                $query .= " LIMIT $inicio,$limit";
                 $data = " ";
                 $ListOrdered = $this->model->getOrdered($query);
                 $this->view->response($ListOrdered, 200);
-                } 
-        else if (isset($_GET['sort']) && isset($_GET['order']) && in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)) {
-                   if (in_array($_GET['sort'], $getWLsort) && in_array($_GET['order'], $getWLorder)){
-                    $sort = $_GET['sort'];
-                    $order = $_GET['order'];
-                    $query .= " ORDER BY $sort $order";
-                   }
-                   else{
-                    $this->view->response("esa palabra no existe en la WL", 404);                     
-                   }
-                    if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-                        $page = $_GET['page'];
-                        if(isset($_GET['limit'])){
-                            if(is_numeric($_GET['limit']))
-                                $limit = $_GET['limit'];                   
-                        }
-                        else {
-                                $limit = 3;
-                            }       
-                        $inicio = ((int)$page - 1) * (int)$limit;                                                 
-                        $query .= " LIMIT $inicio,$limit";
-                        $data = " ";
-                        $ListOrdered = $this->model->getOrdered($query);
-                        $this->view->response($ListOrdered, 200);
-                    } 
-                    else {
-                        $data = " ";
-                        $ListOrdered = $this->model->getOrdered($query);
-                        $this->view->response($ListOrdered, 200);
-                    }
-                } 
-        else {
-        // GET ID 
-            if ($params != null) { 
+            } else {
+                $data = " ";
+                $ListOrdered = $this->model->getOrdered($query);
+                $this->view->response($ListOrdered, 200);
+            }
+        } else {
+            // GET ID 
+            if ($params != null) {
                 $id = $params[':ID'];
                 $beer = $this->model->get($id);
                 if ($beer) {
                     $this->view->response($beer, 200);
-                } 
-                else {
+                } else {
                     $this->view->response("La cerveza con el id $id no existe", 404);
                 }
-            }    
-            else {
+            } else {
                 /** GET ALL */
                 $id = $params;
                 $beers = $this->model->get($id);
                 $this->view->response($beers, 200);
             }
+        }
     }
-}   
 
     public function addBeer($params = null)
     {
