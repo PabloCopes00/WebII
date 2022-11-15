@@ -46,8 +46,8 @@ class BeerApiModel {
             $beerFilOrdered = $query->fetchAll(PDO::FETCH_OBJ);
             return $beerFilOrdered;
     }
-    public function getOrdered($sort, $order){
-        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $sort $order");
+    public function getOrdered($query){
+        $query = $this->db->prepare("SELECT beerSale.id, beerSale.fk_id_name, beerSale.type, beerSale.container,beerSale.stock,beerSale.price, beerNameDesc.beer_name, beerNameDesc.img FROM beerSale INNER JOIN beerNameDesc ON beerSale.fk_id_name = beerNameDesc.id_name_fk $query");
             $query->execute();
             $beerOrdered = $query->fetchAll(PDO::FETCH_OBJ);
             return $beerOrdered;
