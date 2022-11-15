@@ -8,8 +8,8 @@ class BeerApiController
 
     private $model;
     private $view;
-    private $data;
     private $authHelper;
+    private $data;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class BeerApiController
         $getWLorder = ['asc', 'desc'];
         $getWLsort = ['id', 'beer_name', 'type', 'container', 'stock', 'price'];
         $query = null;
-        // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 1,2
+        // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 0,3
         if (isset($_GET['field']) && isset($_GET['data'])) {
             if (in_array($_GET['field'], $getWLsort)) {
                 $data = ucwords($_GET['data']);
@@ -101,7 +101,23 @@ class BeerApiController
                 $ListOrdered = $this->model->getOrdered($query);
                 $this->view->response($ListOrdered, 200);
             }
-        } else {
+        }
+        else if(isset($_GET['page'])){
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $page = $_GET['page'];
+                if (isset($_GET['limit'])) {
+                    if (is_numeric($_GET['limit']))
+                        $limit = $_GET['limit'];
+                } else {
+                    $limit = 3;
+                }
+                $inicio = ((int)$page - 1) * (int)$limit;
+                $query .= "ORDER BY id ASC LIMIT $inicio,$limit";
+                $ListOrdered = $this->model->getOrdered($query);
+                $this->view->response($ListOrdered, 200);
+            }
+        } 
+        else {
             // GET ID 
             if ($params != null) {
                 $id = $params[':ID'];
@@ -120,8 +136,11 @@ class BeerApiController
         }
     }
 
-    public function addBeer($params = null)
-    {
+    public function addBeer($params = null){
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Sin Autorizacion", 401);
+            return;
+        }
         $data = $this->getData();
 
         if (empty($data->fk_id_name) || empty($data->type) || empty($data->container) || empty($data->stock) || empty($data->price)) {
@@ -133,8 +152,11 @@ class BeerApiController
         }
     }
 
-    public function updateBeer($params = null)
-    {
+    public function updateBeer($params = null){
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Sin Autorizacion", 401);
+            return;
+        }
         $id = $params[':ID'];
         $data = $this->getData();
         $beer = $this->model->get($id);
@@ -146,11 +168,9 @@ class BeerApiController
             $this->view->response("La cerveza con el id $id no existe", 404);
     }
 
-    public function deleteBeer($params = null)
-    {
-
-        if (!$this->authHelper->isLoggedIn()) {
-            $this->view->response("No estas logeado", 401);
+    public function deleteBeer($params = null){
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("Sin Autorizacion", 401);
             return;
         }
 
