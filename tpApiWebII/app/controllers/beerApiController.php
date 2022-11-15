@@ -30,8 +30,8 @@ class BeerApiController
         $getWLsort = ['id', 'beer_name', 'type', 'container', 'stock', 'price'];
         $query = null;
         // WHERE beer_name = 'New England Ipa' ORDER BY price DESC LIMIT 1,2
-        if (isset($_GET['field'])) {
-            if ((isset($_GET['field']) && isset($_GET['data'])) && ((in_array($_GET['field'],             $getWLsort) && $_GET['data']))) {
+        if (isset($_GET['field']) && isset($_GET['data'])) {
+            if ((isset($_GET['field']) && isset($_GET['data'])) && ((in_array($_GET['field'],$getWLsort) && $_GET['data']))) {
                 $data = $_GET['data'];
                 $field = $_GET['field'];
                 $query = "WHERE $field = ? ";
@@ -69,10 +69,10 @@ class BeerApiController
                         }
                     }
                 }
-            }
+            } 
         else {
-            // GET ID 
-            if ($params != null) {
+        // GET ID 
+            if ($params != null) { 
                 $id = $params[':ID'];
                 $beer = $this->model->get($id);
                 if ($beer) {
@@ -89,9 +89,8 @@ class BeerApiController
                 $this->view->response($beers, 200);
             }
     }
-}
+}   
 
-    
     public function addBeer($params = null)
     {
         $data = $this->getData();
