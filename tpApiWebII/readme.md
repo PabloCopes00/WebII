@@ -69,10 +69,10 @@ localhost/tpRudaApi/api/beers?page=1
 localhost/tpRudaApi/api/beers?page=1&limit=5    
 ```
 ### Conclusion filtro/orden/paginacion
-* _Podemos solo utilizar solo filter&data (en caso de que solo queramos buscar ese dato de esa columna)_
-* _Podemos solo utilizar solo sort&order (en caso de q solo queramos cambiar el orden de lo q vemos en base a la columna q decidamos -sort-)_
-* _Podemos solo utilizar solo page o page&limit (en caso de que queramos paginar lo que ya estmos viendo en el get all)_
-* _Podemos combinar estos query params como sea siempre y cuando esten los pares juntos (filter&data | sort&order | page&limit)_
+* _Podemos utilizar solo filter&data (en caso de que solo queramos buscar ese dato de esa columna)_
+* _Podemos utilizar solo sort&order (en caso de q solo queramos cambiar el orden de lo q vemos en base a la columna q decidamos -sort-)_
+* _Podemos utilizar solo page o page&limit (en caso de que queramos paginar lo que ya estmos viendo en el get all)_
+* _Podemos combinar estos query params como sea siempre y cuando esten los pares juntos salvo page que puede ir solo (filter&data | sort&order | page&limit)_
 ```
 localhost/tpRudaApi/api/beers?sort=id&order=desc&page=1&limit=5
 (de esta forma, veremos todos los registros organizadoa por id descendente con un limite de 5 registros por pagina)
