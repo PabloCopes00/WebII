@@ -1,6 +1,6 @@
 # Beer Ruda Api
 
-_Consumiento esta API podran ver el nombre, tipo, stock, imagen y precio de nuestras diferentes cervezas_
+_Consumiendo esta API podran ver el nombre, tipo, stock, imagen y precio de nuestras diferentes cervezas_
 
 ## ENDPOINTS 🚀
 
@@ -110,6 +110,7 @@ localhost/tpRudaApi/api/beers/19 (delete)
 ```
 # AUTORIZACION:
 _para poder identificarnos en la api debemos utilizar el metodo GET y cambiar nuestro endpoint a:_
-* auth/token (localhosttpRudaApi/api/auth/token) 
+* auth/token 
+(localhosttpRudaApi/api/auth/token) 
 _Luego con nuestro usuario y contraseña (Basic Auth postman) accedemos para poder recibir un token._
 _Este token es el que nos da la autorizacion para poder insertar,editar o eliminar (Bearer Token)._
