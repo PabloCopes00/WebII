@@ -103,7 +103,7 @@ _y luego debemos completar el siguiente json:_
 "price": "300" --------------->(double)
 }
 ```
-## Servicio DELETE
+## Servicio DELETE (leer autorizacion)
 _para elimintar un registro en la BBDD debemos conocer el ID, utilizamos el endpoint con metodo DELETE (localhost/tpRudaApi/api/beers/:ID)_
 ```
 localhost/tpRudaApi/api/beers/19 (delete)
