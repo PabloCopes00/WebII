@@ -62,7 +62,7 @@ localhost/tpRudaApi/api/beers?field=price&data=550
 ```
 localhost/tpRudaApi/api/beers?field=beer_name&data=New+England+Ipa
 ```
-### PAGINACIÓN (GET)
+### PAGINACIÓN
 _Para utilizar la paginacion debemos ingresar dos valroes para nuestras keys "page"(pagina) y "limit"(registros que queremos mostrar). Podemos utilizar solo la key PAGE y por defecto tendra un limite de 3 registros_   
 ```
 localhost/tpRudaApi/api/beers?page=1
