@@ -4,24 +4,24 @@ _Consumiendo esta API podran ver el nombre, tipo, stock, imagen y precio de nues
 
 ## ENDPOINTS 🚀
 
-* localhost/tpRudaApi/api/beers/ (GET)
-* localhost/tpRudaApi/api/beers/ (POST)
-* localhost/tpRudaApi/api/beers/:ID (GET ID)
-* localhost/tpRudaApi/api/beers/:ID (PUT)
-* localhost/tpRudaApi/api/beers/:ID (DELETE)
-* localhost/tpRudaApi/api/auth/token (GET AUTORIZACION)
+* localhost/tpApiWebII/api/beers/ (GET)
+* localhost/tpApiWebII/api/beers/ (POST)
+* localhost/tpApiWebII/api/beers/:ID (GET ID)
+* localhost/tpApiWebII/api/beers/:ID (PUT)
+* localhost/tpApiWebII/api/beers/:ID (DELETE)
+* localhost/tpApiWebII/api/auth/token (GET AUTORIZACION)
 
 ## Servicios GET
 ### GET ALL
  _Para poder acceder a todos los registros de la BBDD utilizamos el metod GET._
 ```
-localhost/tpRudaApi/api/beers/  
+localhost/tpApiWebII/api/beers/
 ```
 ### GET BY ID
 _Para poder acceder a un registro de la BBDD por ID tambien utilizamos el metodo GET._
-* localhost/tpRudaApi/api/beers/:ID)
+* localhost/tpApiWebII/api/beers/:ID)
 ```
-localhost/tpRudaApi/api/beers/**19**
+localhost/tpApiWebII/api/beers/**19**
 ```
 ### SORT & ORDER
 _utilizando los query params SORT & ORDER podemos establecer un orden ascendente 'asc' o descentendete 'desc' a una clasificacion ingresada en 'sort'_
@@ -35,8 +35,8 @@ ORDER:
 * asc
 * desc
 ```
-localhost/tpRudaApi/api/beers?sort=id&order=asc
-localhost/tpRudaApi/api/beers?sort=id&order=desc
+localhost/tpApiWebII/api/beers?sort=id&order=asc
+localhost/tpApiWebII/api/beers?sort=id&order=desc
 ```
 
 ### FILTER
@@ -44,29 +44,29 @@ _utilizando los query params FIELD & DATA podemos establecer el valor de una cel
        
 * type (varchar 45) 
 ```
-localhost/tpRudaApi/api/beers?field=type&data=Rubia
+localhost/tpApiWebII/api/beers?field=type&data=Rubia
 ```
 * container (varchar 45)
 ```
-localhost/tpRudaApi/api/beers?field=container&data=Lata
+localhost/tpApiWebII/api/beers?field=container&data=Lata
 ```
 * stock (int11) 
 ```
-localhost/tpRudaApi/api/beers?field=stock&data=40
+localhost/tpApiWebII/api/beers?field=stock&data=40
 ```
 * price (int11) 
 ```
-localhost/tpRudaApi/api/beers?field=price&data=550
+localhost/tpApiWebII/api/beers?field=price&data=550
 ```
 * beer_name (varchar 45) 
 ```
-localhost/tpRudaApi/api/beers?field=beer_name&data=New+England+Ipa
+localhost/tpApiWebII/api/beers?field=beer_name&data=New+England+Ipa
 ```
 ### PAGINACIÓN
 _Para utilizar la paginacion debemos ingresar dos valroes para nuestras keys "page"(pagina) y "limit"(registros que queremos mostrar). Podemos utilizar solo la key PAGE y por defecto tendra un limite de 3 registros_   
 ```
-localhost/tpRudaApi/api/beers?page=1
-localhost/tpRudaApi/api/beers?page=1&limit=5    
+localhost/tpApiWebII/api/beers?page=1
+localhost/tpApiWebII/api/beers?page=1&limit=5    
 ```
 ### Conclusion filtro/orden/paginacion
 * _Podemos utilizar solo filter&data (en caso de que solo queramos buscar ese dato de esa columna)_
@@ -89,7 +89,7 @@ _Para insertar un registro en la BBDD necesitamos poner nuestro endpoint con el 
 }
 ```
 ## Servicio PUT (leer autorizacion)
-_Para editar un registro en la BBDD necesitamos poner nuestro endpoint con el metodo PUT y saber el ID que vamos a editar (localhost/tpRudaApi/api/beers/:ID)_
+_Para editar un registro en la BBDD necesitamos poner nuestro endpoint con el metodo PUT y saber el ID que vamos a editar (localhost/tpApiWebII/api/beers/:ID)_
   ```
 localhost/tpRudaApi/api/beers/1
   ```  
@@ -106,11 +106,11 @@ _y luego debemos completar el siguiente json:_
 ## Servicio DELETE (leer autorizacion)
 _para elimintar un registro en la BBDD debemos conocer el ID, utilizamos el endpoint con metodo DELETE (localhost/tpRudaApi/api/beers/:ID)_
 ```
-localhost/tpRudaApi/api/beers/19 (delete)
+localhost/tpApiWebII/api/beers/19 (delete)
 ```
 # AUTORIZACION:
 _para poder identificarnos en la api debemos utilizar el metodo GET y cambiar nuestro endpoint a:_
 * auth/token 
-(localhosttpRudaApi/api/auth/token) 
+(localhost/tpApiWebII/api/auth/token) 
 _Luego con nuestro usuario y contraseña (Basic Auth postman) accedemos para poder recibir un token._
 _Este token es el que nos da la autorizacion para poder insertar,editar o eliminar (Bearer Token)._
