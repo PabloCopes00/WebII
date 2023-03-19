@@ -2,7 +2,7 @@
 
 // Ejercicios: Nivel 1
 console.log(`\n\nEjercicios: Nivel 1:\n\n`);
-console.log(`Funciones:\n- whoIsOlder\n- examScore\n- whichSeason\n- weekOrWeekend\n- `);
+console.log(`Funciones:\n- whoIsOlder\n- examScore\n- whichSeason\n- weekOrWeekend\n- howManyDays\n- `);
 // Obtenga la entrada del usuario usando el aviso ("Ingrese su edad:"). Si el usuario tiene 18 años o más, muestre el mensaje: 'Tiene la edad suficiente para conducir', pero si no tiene 18 años, brinde otro mensaje que indique que debe esperar la cantidad de años que necesita para cumplir 18.
 //ya lo hicimos en el día 3.
 // Ingrese su edad: 30
@@ -99,7 +99,7 @@ function whichSeason() {
         case 'septiembre': case 'setiembre': case 'octubre': case 'noviembre':
             console.log(`estamos en primavera! a disfrutar de las flores, dentro de poco llega el calor!`);
             break;
-        default: console.log(`Eso no es un mes! ingresa un mes correctamente escrito!`);
+        default: console.log(`${a} no es un mes! ingresa un mes correctamente escrito!`);
     }
 }
 // whichSeason();
@@ -108,12 +108,20 @@ function whichSeason() {
 
 /**Ingrese un dia de la semana y el programa reconocera si es dia laboral o fin de semana. */
 function weekOrWeekend(d) {
+    // refactorizar haciendo whitelist
     let day = d.toLowerCase();
-    if (day == 'sabado' || day == 'domingo') {
-        console.log(`Hoy es ${day[0].toUpperCase() + day.substring(1)}, por eso tenes que disfrutar del fin de semana!`);
+    let days = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
+    let check = days.indexOf(day);
+    if (check != -1) {
+        if (day == 'sabado' || day == 'domingo') {
+            console.log(`Hoy es ${day[0].toUpperCase() + day.substring(1)}, por eso tenes que disfrutar del fin de semana!`);
+        } else {
+            console.log(`Hoy es ${day[0].toUpperCase() + day.substring(1)}, es día laboral! falta un poco para el finde! a trabajar!`);
+        }
     } else {
-        console.log(`Hoy es ${day[0].toUpperCase() + day.substring(1)}, es día laboral! falta un poco para el finde! a trabajar!`);
-    } // esto teniendo en cuenta que la perosna va a ser buena y va a poner un dia de la semana y no cualquier string 'fmdsanfops' ya que eso tambien sería un dia laboral, para este caso deberíamos hacer un else if con los dias de la semana y un else para decir que eso no es un dia de la semana y que ingrese un dia de la semana correctamente.
+        console.log(`${d} no es un dia de la semana, ingresa uno correctamente.`);
+    }
+
 }
 // weekOrWeekend('Sabado');
 
@@ -144,5 +152,49 @@ console.log(`\n\nEjercicios: Nivel 3:\n\n`);
 
 //   Introduce un mes: FEbrero
 //   Febrero tiene 28 días.
+function howManyDays(d) {
+    //vamos a intentar chequear antes con una whitelist.
+    let day = d.toLowerCase();
+    let months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "setiembre", "octubre", "noviembre", "diciembre"]
+    let month = months.indexOf(day);
+
+    if (month != -1) {
+        if (day == "febrero") {
+            console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 28 Días`);
+        } else if (day == 'abril' || day == 'junio' || day == 'septiembre' || day == 'noviembre') {
+            console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 30 Días`);
+        } else {
+            console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 31 Días`);
+        }
+    } else {
+        console.log(`${d} no es un mes, Ingrese un mes correctamente.`);
+    }
+}
+
+
 // Escribe un programa que diga el número de días en un mes, ahora considera un año bisiesto.
+function howManyDaysB(d) {
+    //vamos a intentar chequear antes con una whitelist.
+    let now = new Date();
+    let day = d.toLowerCase();
+    let months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "setiembre", "octubre", "noviembre", "diciembre"]
+    let month = months.indexOf(day);
+
+    if (month != -1) {
+        if (day == "febrero") {
+            if (now.getFullYear() % 4 == 0) {
+                console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 29 Días`);
+            }
+            else {
+                console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 28 Días`);
+            }
+        } else if (day == 'abril' || day == 'junio' || day == 'septiembre' || day == 'noviembre') {
+            console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 30 Días`);
+        } else {
+            console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 31 Días`);
+        }
+    } else {
+        console.log(`${d} no es un mes, Ingrese un mes correctamente.`);
+    }
+}
 // 🎉 FELICITACIONES ! 🎉
