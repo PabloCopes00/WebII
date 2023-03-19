@@ -277,49 +277,125 @@ tester = rectangle();
 console.log(`Rectangulo | alto: ${tester.alto} | ancho: ${tester.ancho}\nArea: ${tester.area}\nPerimetro: ${tester.perimetro}`);
 
 // Obtenga el radio usando prompt y calcule el área de un círculo (área = pi x r x r) y la circunferencia de un círculo (c = 2 x pi x r) donde pi = 3.14.
+function circleAC() {
+    //let radius = +prompt("Ingrese un numero para el radio del circulo.");
+    let radius = 5;
+    let area = Math.PI * Math.pow(radius, 2);
+    let circumference = (Math.PI * radius) * 2;
+    let result = [radius, area.toFixed(2), circumference.toFixed(2)];
+    return result;
+}
+tester = circleAC();
+console.log(`Radio: ${tester[0]}\nArea: ${tester[1]}\nCircunferencia: ${tester[2]}`);
 
 // Calcule la pendiente, la intersección X y la intersección Y de y = 2x -2
-
+// puntos (0,-2)(2,2)
+tester = slope(0, -2, 2, 2)
+console.log(`la pendiente entre el punto (0,-2) y (2,2) es ${tester[2]}, ${tester[0]}/${tester[1]}`);
 // La pendiente es m = (y2-y1)/(x2-x1). Encuentra la pendiente entre el punto (2, 2) y el punto (6,10)
 
-// Compare la pendiente de las dos preguntas anteriores.
+
+function slope(x1, y1, x2, y2) {
+    let num = (y2 - y1)
+    let den = (x2 - x1)
+    let m;
+    if (num / den > 0) {
+        m = "creciente";
+    }
+    else {
+        m = "decreciente";
+    }
+    let result = [num, den, m]
+    return result
+}
+tester = slope(2, 2, 6, 10)
+console.log(`la pendiente entre el punto (2,2) y (6,10) es ${tester[2]}, ${tester[0]}/${tester[1]}`);
+
 
 // Calcula el valor de y (y = x2 + 6x + 9). Trate de usar diferentes valores de x y averigüe en qué valor de x y es 0.
+function valorY(x) {
+    let y = x * 2 + 6 * x + 9;
+    return y;
+}
+console.log(`x = 0 | y = ${valorY(0)}`);
+console.log(`x = 1 | y = ${valorY(1)}`);
+console.log(`x = 2 | y = ${valorY(2)}`);
+console.log(`x = 4 | y = ${valorY(4)}`);
+console.log(`x = -9/8 | y = ${valorY(-9 / 8)}`);
 
 // Escriba un script con prompt que solicite al usuario que ingrese las horas y la tarifa por hora. ¿Calcular el salario de la persona?
+function salaryWMY() {
+    //let hour = +prompt("Ingrese cantidad de horas trabajadas por día.");
+    //let fare = +prompt("Ingrese la tarifa por hora.");
+    let hour = 8
+    let fare = 28
+    let day = Math.trunc(hour * fare);
+    let week = Math.trunc(day * 5);
+    let month = Math.trunc(week * 4.34524);
+    let year = Math.trunc(month * 12);
+    let result = [hour, fare, day, week, month, year];
+    return result;
+}
+let salary = salaryWMY();
+console.log(`Horas: ${salary[0]}\nTarifa: $${salary[1]}\nSueldo por día: $${salary[2]}\nSueldo por semana: $${salary[3]}\nSueldo por mes: $${salary[4]}\nSueldo por año: $${salary[5]}`);
 
 // Ingrese horas: 40
 // Introduce la tarifa por hora: 28
 // Su ganancia semanal es 1120
+
 // Si la longitud de su nombre es mayor que 7, diga que su nombre es largo; de lo contrario, diga que su nombre es corto.
+function nameLong() {
+    let name = prompt("ingrese su nombre");
+    name.length > 7 ? console.log(`Su nombre es largo`) : console.log(`Su nombre es corto`);
+}
+// nameLong();
+//primer if ternario que uso y sale bien !!!!! GRANDE PA!
 
 // Compare la longitud de su nombre y la longitud de su apellido y debería obtener este resultado.
-
+function nameAndLastName() {
+    let name = prompt("Ingrese su nombre");
+    let lastName = prompt("Ingrese su apellido")
+    if (name.length == lastName.length) {
+        console.log(`Su nombre '${name}' tiene la misma cantidad de letras que su apellido '${lastName}'`);
+    }
+    else {
+        name.length > lastName.length ? console.log(`Su nombre '${name}' es mas largo que su apellido '${lastName}'`) : console.log(`Su apellido '${lastName}' es mas largo que su nombre '${name}'`);
+    }
+}
+//nameAndLastName();
 // let firstName = "Asabeneh";
 // let lastName = "Yetayeh";
 // Tu primer nombre, Asabeneh, es más largo que tu apellido, Yetayeh.
-// Declare dos variables myAge y yourAge y asignarles los valores iniciales y myAge y yourAge.
 
-// let myAge = 250;
-// let yourAge = 25;
-// Soy 225 años mayor que tú.
 // Usando prompt, obtenga el año en que nació el usuario y, si el usuario tiene 18 años o más, permita que el usuario conduzca, si no dígale que espere una cierta cantidad de años.
+function canDrive() {
+    const LEGAL_AGE = 18;
+    age = +prompt("Ingrese su edad.");
+    age >= LEGAL_AGE ? console.log(`Usted puede conducir.`) : console.log(`Usted es menor, debe esperar ${LEGAL_AGE - age} años`);
+}
+// canDrive();
 
 // Introduzca el año de nacimiento: 1995
 // Tienes 25 años. Tienes la edad suficiente para conducir.
+function canDriveYear() {
+    const LEGAL_AGE = 25;
+    let now = new Date();
+    const YEAR = +now.getFullYear();
+    let birthYear = +prompt("Ingrese su año de nacimiento.");
+    age = YEAR - birthYear;
+    age >= LEGAL_AGE ? console.log(`Tienes ${age}, puedes manejar`) : console.log(`Usted es menor, debe esperar ${LEGAL_AGE - age} años`);
+}
+// canDriveYear();
 
-// Introduzca el año de nacimiento: 2005
-// Tienes 15 años. Podrás conducir después de 3 años.
-// Escriba un script que solicite por prompt al usuario que ingrese el número de años. Calcular el número de segundos que puede vivir una persona. Supongamos que alguien vive solo cien años
-
-// Ingrese el número de años de vida: 100
-//  Viviste 3153600000 segundos.
-// Cree un formato de hora legible por humanos usando el objeto Date.
-
-// YYYY-MM-DD HH:mm
-// DD-MM-YYYY HH:mm
-// DD/MM/YYYY HH:mm
 console.log(`\n\nEjercicios: Nivel 3:\n\n`);
 // Ejercicios: Nivel 3
 // Cree un formato de hora legible por humanos usando el objeto Date. La hora y el minuto deben ser siempre dos dígitos (7 horas deben ser 07 y 5 minutos deben ser 05)
 // YYY-MM-DD HH:mm eg. 20120-01-02 07:05
+function actualHour() {
+    let now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    console.log(`${hours} horas, ${minutes} minutos y ${seconds} segundos`);
+}
+actualHour();
