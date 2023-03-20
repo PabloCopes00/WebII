@@ -238,7 +238,7 @@ console.log(`La cadena empieza con 30?${challenge.startsWith(" 30")}`); //dejo e
 // Use el método endsWith() con la cadena 30 días de JavaScript y haga que el resultado sea verdadero
 console.log(`La cadena termina con cript? ${challenge.endsWith("cript ")}`); //dejo elespacio porque deje originalmente para despuez hacer trim()
 // Usa el método match() para encontrar todos los a en 30 días de JavaScript
-console.log(`cuantas 'a' hay en el string? ${challenge.match(/a/gi)}`);
+console.log(`cuantas 'a' hay en el string? ${challenge.match(/a/gi).length}`);
 // Use concat() y fusione '30 días de' y 'JavaScript' en una sola cadena, '30 días de JavaScript'
 let days = '30 Days Of';
 console.log(days.concat(" JavaScript"));

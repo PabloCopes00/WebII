@@ -55,22 +55,26 @@ console.log(`\n\nEjercicios: Nivel 2:\n\n`);
 // 0-49, F
 /**pasar por argumento la nota numerica, y nos dira que no ta sacamos (A B C D F). */
 function examScore(x) {
-    switch (true) {
-        case x >= 80 && x <= 100:
-            console.log(`Excelente! usted saco 'A'`);
-            break;
-        case x >= 70 && x <= 89:
-            console.log(`Excelente! usted saco 'B'`);
-            break;
-        case x >= 60 && x <= 69:
-            console.log(`Muy Bien! usted saco 'C'`);
-            break;
-        case x >= 50 && x <= 59:
-            console.log(`Bien! usted saco 'D'`);
-            break;
-        case x >= 0 && x <= 49:
-            console.log(`Que paso!? usted saco 'F'`);
-            break;
+    if (x >= 0 < 101) {
+        switch (true) {
+            case x >= 80 && x <= 100:
+                console.log(`Excelente! usted saco 'A'`);
+                break;
+            case x >= 70 && x <= 89:
+                console.log(`Excelente! usted saco 'B'`);
+                break;
+            case x >= 60 && x <= 69:
+                console.log(`Muy Bien! usted saco 'C'`);
+                break;
+            case x >= 50 && x <= 59:
+                console.log(`Bien! usted saco 'D'`);
+                break;
+            case x >= 0 && x <= 49:
+                console.log(`Que paso!? usted saco 'F'`);
+                break;
+        }
+    } else {
+        console.log(`ingrese un numero entre 0 y 100.`);
     }
 }
 // examScore(88);
@@ -111,8 +115,8 @@ function weekOrWeekend(d) {
     // refactorizar haciendo whitelist
     let day = d.toLowerCase();
     let days = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
-    let check = days.indexOf(day);
-    if (check != -1) {
+    let check = days.includes(day);
+    if (check) {
         if (day == 'sabado' || day == 'domingo') {
             console.log(`Hoy es ${day[0].toUpperCase() + day.substring(1)}, por eso tenes que disfrutar del fin de semana!`);
         } else {
@@ -156,9 +160,9 @@ function howManyDays(d) {
     //vamos a intentar chequear antes con una whitelist.
     let day = d.toLowerCase();
     let months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "setiembre", "octubre", "noviembre", "diciembre"]
-    let month = months.indexOf(day);
+    let month = months.includes(day);
 
-    if (month != -1) {
+    if (month) {
         if (day == "febrero") {
             console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 28 Días`);
         } else if (day == 'abril' || day == 'junio' || day == 'septiembre' || day == 'noviembre') {
@@ -178,9 +182,9 @@ function howManyDaysB(d) {
     let now = new Date();
     let day = d.toLowerCase();
     let months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "setiembre", "octubre", "noviembre", "diciembre"]
-    let month = months.indexOf(day);
+    let month = months.includes(day);
 
-    if (month != -1) {
+    if (month) {
         if (day == "febrero") {
             if (now.getFullYear() % 4 == 0) {
                 console.log(`${day[0].toUpperCase() + day.substring(1)} tiene 29 Días`);
