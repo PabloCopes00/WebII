@@ -362,6 +362,18 @@ console.log(`\n\nEjercicios: Nivel 3:\n\n`);
 // Extrae todos los países que contengan la palabra 'land' del array countries e imprimela como un array
 // Encuentra el país que contiene la mayor cantidad de caracteres en el array countries
 // Extrae todos los países que contienen la palabra 'land' del array countries e imprimela como un array
-// Extrae todos los países que contengan solo cuatro caracters del array countries e impremela como un array
 // Extrae todos los paíse que contengan dos o más palabras del array countries e imprimela como un array
 // Invertir el array countries y poner en mayúscula cada país y almacenalo en un array
+// Extrae todos los países que contengan solo cuatro caracters del array countries e impremela como un array
+function countriesChar(n) {
+    let aux = [];
+    for (let item of countries) {
+        item.length == n ? aux.push(item) : null;
+    }
+    return aux;
+}
+// let num = prompt("ingrese cantidad de caracteres que desea buscar")
+// let test = countriesChar(num);
+// console.log(`Estos son los paises con ${num} letras.`, test);
+let test = countriesChar(7);
+console.log(`Estos son los paises con 7 letras.`, test);
