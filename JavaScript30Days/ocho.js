@@ -136,12 +136,12 @@ const users = {
         isLoggedIn: false,
         points: 30
     },
-    Asab: {
+    Pablo: {
         email: 'asab@asab.com',
-        skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
+        skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node', 'MERN'],
         age: 25,
         isLoggedIn: false,
-        points: 50
+        points: 70
     },
     Brook: {
         email: 'daniel@daniel.com',
@@ -152,7 +152,7 @@ const users = {
     },
     Daniel: {
         email: 'daniel@alex.com',
-        skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
+        skills: ['HTML', 'CSS', 'Python'],
         age: 20,
         isLoggedIn: false,
         points: 40
@@ -166,14 +166,14 @@ const users = {
     },
     Thomas: {
         email: 'thomas@thomas.com',
-        skills: ['HTML', 'CSS', 'JavaScript', 'React'],
+        skills: ['HTML', 'CSS', 'React'],
         age: 20,
         isLoggedIn: false,
         points: 40
     },
     Paul: {
         email: 'paul@paul.com',
-        skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
+        skills: ['HTML', 'CSS', 'MongoDB', 'Express', 'React', 'Node'],
         age: 20,
         isLoggedIn: true,
         points: 40
@@ -195,29 +195,47 @@ function findMaxSkill() {
 console.log(findMaxSkill());
 
 // Contar los usuarios conectados
-function online(){
+function online() {
     let counter = 0;
     for (let i = 0; i < Object.keys(users).length; i++) {
         let online = Object.entries(users)[i][1].isLoggedIn;
-        if (online){
+        if (online) {
             counter++;
         }
     }
     return counter;
 }
-console.log("Cantidad de usuarios online? ",online());
+console.log("Cantidad de usuarios online? ", online());
 //Contar los usuarios que tienen más de 50 puntos del siguiente objeto.
-
+function maxPoints() {
+    let maxPoints = 0;
+    for (let i = 0; i < Object.keys(users).length; i++) {
+        let pts = Object.entries(users)[i][1].points;
+        if (pts > 50) {
+            maxPoints++;
+        }
+    }
+    return maxPoints;
+}
+console.log(`Cuantos usuarios hay con mas de 50 pts? `, maxPoints());
 
 // Encontrar personas que sean desarrolladores MERN stack del objeto de los usuarios
-
-// Establezca su nombre en el objeto usuarios sin modificar el objeto usuarios original
-
+function findLenguage(n) {
+    let counter = 0;
+    for (let i = 0; i < Object.keys(users).length; i++) {
+        let check = Object.entries(users)[i][1].skills.includes(n);
+        if (check) {
+            counter++;
+        }
+    }
+    return counter;
+}
+console.log("Cuantos programadores hay que sepan el lenguaje JavaScript?", findLenguage('JavaScript'));
 // Obtener todas las claves o propiedades del objeto usuarios
+console.log("Obtener las propiedades del objeto ", Object.keys(users));
 
 // Obtener todos los valores del objeto usuarios
-
-// Utilice el objeto países para imprimir el nombre del país, la capital, la población y los idiomas.
+console.log("Estos son los valores de las propiedades",Object.values(users));
 
 // Ejercicios: Nivel 3
 console.log(`\n\nEjercicios: Nivel 3:\n\n`);
