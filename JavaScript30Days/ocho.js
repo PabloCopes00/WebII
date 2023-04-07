@@ -124,63 +124,91 @@ dog.getDogInfo = function () {
     return info
 }
 console.log(`\n`, dog.getDogInfo());
+
+
 // Ejercicios: Nivel 2
 console.log(`\n\nEjercicios: Nivel 2:\n\n`);
+const users = {
+    Alex: {
+        email: 'alex@alex.com',
+        skills: ['HTML', 'CSS', 'JavaScript'],
+        age: 20,
+        isLoggedIn: false,
+        points: 30
+    },
+    Asab: {
+        email: 'asab@asab.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
+        age: 25,
+        isLoggedIn: false,
+        points: 50
+    },
+    Brook: {
+        email: 'daniel@daniel.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
+        age: 30,
+        isLoggedIn: true,
+        points: 50
+    },
+    Daniel: {
+        email: 'daniel@alex.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
+        age: 20,
+        isLoggedIn: false,
+        points: 40
+    },
+    John: {
+        email: 'john@john.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
+        age: 20,
+        isLoggedIn: true,
+        points: 50
+    },
+    Thomas: {
+        email: 'thomas@thomas.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React'],
+        age: 20,
+        isLoggedIn: false,
+        points: 40
+    },
+    Paul: {
+        email: 'paul@paul.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
+        age: 20,
+        isLoggedIn: true,
+        points: 40
+    }
+}
 // Encuentra a la persona que tiene muchas habilidades en el objeto de los usuarios.
+function findMaxSkill() {
+    let counter = 0;
+    let name = "";
+    for (let i = 0; i < Object.keys(users).length; i++) {
+        if (Object.entries(users)[i][1].skills.length > counter) {
+            counter = Object.entries(users)[i][1].skills.length;
+            name = Object.keys(users)[i];
+        }
+    }
+    let statement = `${name} es el usuario con mayores habilidades con un total de ${counter}`;
+    return statement;
+}
+console.log(findMaxSkill());
 
-// Contar los usuarios conectados, contar los usuarios que tienen más de 50 puntos del siguiente objeto.
+// Contar los usuarios conectados
+function online(){
+    let counter = 0;
+    for (let i = 0; i < Object.keys(users).length; i++) {
+        let online = Object.entries(users)[i][1].isLoggedIn;
+        if (online){
+            counter++;
+        }
+    }
+    return counter;
+}
+console.log("Cantidad de usuarios online? ",online());
+//Contar los usuarios que tienen más de 50 puntos del siguiente objeto.
 
-// const users = {
-//   Alex: {
-//     email: 'alex@alex.com',
-//     skills: ['HTML', 'CSS', 'JavaScript'],
-//     age: 20,
-//     isLoggedIn: false,
-//     points: 30
-//   },
-//   Asab: {
-//     email: 'asab@asab.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
-//     age: 25,
-//     isLoggedIn: false,
-//     points: 50
-//   },
-//   Brook: {
-//     email: 'daniel@daniel.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
-//     age: 30,
-//     isLoggedIn: true,
-//     points: 50
-//   },
-//   Daniel: {
-//     email: 'daniel@alex.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
-//     age: 20,
-//     isLoggedIn: false,
-//     points: 40
-//   },
-//   John: {
-//     email: 'john@john.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
-//     age: 20,
-//     isLoggedIn: true,
-//     points: 50
-//   },
-//   Thomas: {
-//     email: 'thomas@thomas.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'React'],
-//     age: 20,
-//     isLoggedIn: false,
-//     points: 40
-//   },
-//   Paul: {
-//     email: 'paul@paul.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
-//     age: 20,
-//     isLoggedIn: false,
-//     points: 40
-//   }
-// }```
+
 // Encontrar personas que sean desarrolladores MERN stack del objeto de los usuarios
 
 // Establezca su nombre en el objeto usuarios sin modificar el objeto usuarios original
