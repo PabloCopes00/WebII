@@ -168,7 +168,7 @@ for (let i = 0; i < 11; i++) {
 /**imprime solo los pares hasta hasta n */
 function even(n) {
     for (let i = 0; i < n; i++) {
-        i % 2 == 0 && console.log(i);
+        i % 2 == 0 && console.log(i); //crotada de ternario
     }
 }
 console.log(`Funcion even(7) hasta 6:`, even(7));
@@ -178,7 +178,7 @@ console.log(`Funcion even(7) hasta 6:`, even(7));
 
 function odd(n) {
     for (let i = 0; i < n; i++) {
-        i % 2 != 0 && console.log(i);
+        i % 2 != 0 && console.log(i); //crotada de ternario
     }
 }
 console.log(`Funcion odd(7) hasta 6:`, odd(7));
