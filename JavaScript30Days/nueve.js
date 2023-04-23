@@ -130,9 +130,9 @@ console.log(`findIndex nos da como resultado el indice del valor que buscamos, p
 
 
 // some: Comprueba si algunos de los elementos son similares en un aspecto. Retorna un booleano
-const bools = [true, true, true, true];
+const bools = [true, true, false, true];
 const areSomeTrue = bools.some((b) => b === true);
-console.log(areSomeTrue);
+console.log("Algunos son verdaderos?", areSomeTrue);
 
 // sort: El método "sort" ordena los elementos del array de forma ascendente o descendente. Por defecto, el método sort() ordena los valores como strings. Esto funciona bien para los elementos del array de strings pero no para los números. Si los valores numéricos se ordenan como strings y nos da un resultado erróneo. El método de Sort modifica el array original. Se recomienda copiar los datos originales antes de empezar a utilizar el método sort.
 
@@ -247,16 +247,41 @@ console.log(getStringLists(products1));
 console.log(`Usa reduce para sumar todos los números del array de números.`);
 let numReduce = numbers1.reduce((acumulador, current) => acumulador + current, 0);
 console.log(numReduce);
-// Utiliza reduce para concatenar todos los países y producir esta frase: Estonia, Finland, Sweden, Denmark, Norway, y IceLand son países del norte de Europa
-// Explique la diferencia entre some y every
-// Utilice some para comprobar si la longitud de algunos nombres es superior a siete en el array de nombres.
-// Utilice every para comprobar si todos los países contienen la palabra land.
-// Explique la diferencia entre find y findIndex.
-// Utilice find para encontrar el primer país que contenga sólo seis letras en el array de países.
-// Utilice findIndex para encontrar la posición del primer país que contenga sólo seis letras en el array de países.
-// Utilice findIndex para encontrar la posición de Norway si no existe en el array obtendrá -1.
-// Utilice findIndex para encontrar la posición de Russia si no existe en el array obtendrá -1.
 
+console.log(`Utiliza reduce para concatenar todos los países y producir esta frase: Argentina,Albania, etc.. son los paises del array`);
+let statement = " Son los paises dentro del Array"
+let arrCountries = countries.reduce((acc, curr) => acc + ", " + curr);
+arrCountries += statement;
+console.log(arrCountries);
+
+// Explique la diferencia entre some y every
+// some chequea q algunos sean similares en aspecto y retorna un booleano, en cambio every chequea que todos sean similares.
+
+console.log(`Utilice some para comprobar si la longitud de algunos nombres es superior a siete en el array de nombres.`, names);
+let someNames = names.some((item) => item.length > 7);
+console.log(someNames);
+
+console.log(`Utilice every para comprobar si todos los países contienen la palabra land.`);
+let land = countries.every((a) => a.includes("land"));
+console.log(land);
+
+// Explique la diferencia entre find y findIndex.
+// find encuentra el primer elemento que cumple con la condicion y findIndex te dice el indice de ese elemento que cumple la condicion.
+
+console.log(`Utilice find para encontrar el primer país que contenga sólo seis letras en el array de países.`);
+let firstSixLetterCountry = countries.find((a) => a.length == 6);
+console.log(firstSixLetterCountry);
+
+console.log(`Utilice findIndex para encontrar la posición del primer país que contenga sólo seis letras en el array de países.`);
+let firstSixLetterCountryIndex = countries.findIndex((a) => a.length == 6);
+console.log(`${firstSixLetterCountry} esta en el index: `, firstSixLetterCountryIndex);
+
+console.log(`Utilice findIndex para encontrar la posición de Argentina si no existe en el array obtendrá -1.`);
+let findArgentina = countries.findIndex((a) => a == "Argentina");
+console.log(findArgentina);
+console.log(`Utilice findIndex para encontrar la posición de Russia si no existe en el array obtendrá -1.`);
+let findRusia = countries.findIndex((a) => a == "Russia");
+console.log(findRusia);
 // Ejercicios: Nivel 2
 console.log(`\n\nEjercicios: Nivel 2:\n\n`);
 // Encuentre el precio total de los productos encadenando dos o más iteradores de matrices (por ejemplo, arr.map(callback).filter(callback).reduce(callback)).
