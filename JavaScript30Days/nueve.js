@@ -282,14 +282,30 @@ console.log(findArgentina);
 console.log(`Utilice findIndex para encontrar la posición de Russia si no existe en el array obtendrá -1.`);
 let findRusia = countries.findIndex((a) => a == "Russia");
 console.log(findRusia);
+
 // Ejercicios: Nivel 2
 console.log(`\n\nEjercicios: Nivel 2:\n\n`);
-// Encuentre el precio total de los productos encadenando dos o más iteradores de matrices (por ejemplo, arr.map(callback).filter(callback).reduce(callback)).
-// Encuentre la suma del precio de los productos usando sólo reduce(callback)).
+
+console.log("Encuentre el precio total de los productos encadenando dos o más iteradores de matrices (por ejemplo, arr.map(callback).filter(callback).reduce(callback)).");
+
+let totalSum1 = products1.map((item) => item.price).filter((item) => typeof item == "number").reduce((a, b) => a + b, 0)
+console.log("products1.map((item) => item.price).filter((item) => typeof item == 'number').reduce((a, b) => a + b, 0) da como resultado: ", totalSum1)
+
+console.log(`Encuentre la suma del precio de los productos usando sólo reduce(callback))`);
+let totalSum2 = products1.reduce((a, b) => a + (typeof b.price == "number" ? b.price : 0), 0);
+console.log(`products1.reduce((a, b) => a + (typeof b.price == "number" ? b.price : 0), 0); `, totalSum2);
+
 // Declara una función llamada categorizeCountries que retorna un array de países que tienen algún patrón común (encuentras el array de países en este repositorio como countries.js(ej 'land', 'ia', 'island','stan')).
+function categorizeCountries(arr, code) {
+  //hay que tomar  paies de countries.js y traerlo, trabajar con ese arreglo y copiar los que tengan la palabra clave que queremos que encuentre, toma como parametro un array y un string 
+}
+
 // Cree una función que retorne un array de objetos, que es la letra y el número de veces que la letra usa para empezar el nombre de un país.
+
 // Declara una función getFirstTenCountries y retorna un array de diez países. Utiliza diferente programación funcional para trabajar en el array countries.js.
+
 // Declara una función getLastTenCountries que devuelve los últimos diez países del array de países.
+
 // Encuentre qué letra se utiliza muchas veces como inicial de un nombre de país del array de países (ej. Finland, Fiji, France etc)
 
 // Ejercicios: Nivel 3
