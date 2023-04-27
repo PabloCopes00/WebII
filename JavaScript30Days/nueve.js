@@ -497,16 +497,36 @@ function categorizeCountries(arr, str) {
 }
 console.log("categorizeCountries(countries2, 'land')", categorizeCountries(countries2, "land"));
 
-// Cree una función que retorne un array de objetos, que es la letra y el número de veces que la letra usa para empezar el nombre de un país.
-function arrayObject(){
+console.log(`Cree una función que retorne un array de objetos, que es la letra y el número de veces que la letra usa para empezar el nombre de un país.`);
 
+function letterArrayObject(l) {
+  let copy = countries2.filter((country) => country.startsWith(l.toUpperCase()));
+  let object1 = {
+    letter: l.toUpperCase(),
+    count: copy.length
+  };
+  return object1;
 }
+console.log(letterArrayObject("a"));
 
-// Declara una función getFirstTenCountries y retorna un array de diez países. Utiliza diferente programación funcional para trabajar en el array countries.js.
+console.log(`Declara una función getFirstTenCountries y retorna un array de diez países. Utiliza diferente programación funcional para trabajar en el array countries.js. getFirstTenCountries(array, cantidad)`);
 
-// Declara una función getLastTenCountries que devuelve los últimos diez países del array de países.
+function getFirstTenCountries(arr, n) {
+  let copy = arr.filter((country, index) => index < n && console.log(country))
+  return copy
+}
+getFirstTenCountries(countries2, 8)
+
+console.log(`Declara una función getLastTenCountries que devuelve los últimos diez países del array de países.`);
 
 // Encuentre qué letra se utiliza muchas veces como inicial de un nombre de país del array de países (ej. Finland, Fiji, France etc)
+function howManywith(arr, l) {
+  let copy = arr.filter((country) => country.startsWith(l.toUpperCase()));
+  let count = copy.length;
+  return count;
+}
+console.log(`cuantos paises que empiecen con A? howManywith(array, letter)`, howManywith(countries2, "a"));
+
 
 // Ejercicios: Nivel 3
 console.log(`\n\nEjercicios: Nivel 3:\n\n`);
