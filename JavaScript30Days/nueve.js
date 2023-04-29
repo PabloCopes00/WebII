@@ -3413,56 +3413,51 @@ function orderCountries(v = null) {
 
 // console.log(orderCountries(`name`));
 
-// *** Encuentre las 10 lenguas más habladas:
 
-// // El resultado debería ser el siguiente
-// console.log(mostSpokenLanguages(countries, 10))
-// [
-// {country: 'English',count:91},
-// {country: 'French',count:45},
-// {country: 'Arabic',count:25},
-// {country: 'Spanish',count:24},
-// {country:'Russian',count:9},
-// {country:'Portuguese', count:9},
-// {country:'Dutch',count:8},
-// {country:'German',count:7},
-// {country:'Chinese',count:5},
-// {country:'Swahili',count:4}
-// ]
+console.log(`Encuentre las 10 lenguas más habladas:`);
+function mostSpokenLanguages(arr, n) { //index < n
+  function check(l) {
+    const copy = JSON.parse(JSON.stringify(arr));
+    return copy.filter((country) => country.languages.includes(l)).length
+  }
+  let English = check('English');
+  let French = check('French');
+  let Arabic = check('Arabic');
+  let Spanish = check('Spanish');
+  let Russian = check('Russian');
+  let Portuguese = check('Portuguese');
+  let Dutch = check('Dutch');
+  let German = check('German');
+  let Chinese = check('Chinese');
+  let Swahili = check('Swahili');
+  const languagesCount = [
+    { language: 'Swahili', count: Swahili },
+    { language: 'Chinese', count: Chinese },
+    { language: 'Dutch', count: Dutch },
+    { language: 'German', count: German },
+    { language: 'Portuguese', count: Portuguese },
+    { language: 'Arabic', count: Arabic },
+    { language: 'Russian', count: Russian },
+    { language: 'Spanish', count: Spanish },
+    { language: 'English', count: English },
+    { language: 'French', count: French },]
+  let copyLanguages = languagesCount.sort((a, b) => b.count - a.count)
+  copyLanguages.forEach((lang, index) => index < n ? console.log(lang) : null)
+  return copyLanguages;
+}
+console.log(mostSpokenLanguages(countries_data, 3));
+console.log(`crear una función que muestre los países más poblados. mostPopulatedCountries(countries_data, 4)∫`);
 
-// // El resultado debería ser el siguiente
-// console.log(mostSpokenLanguages(countries, 3))
-// [
-// {country: 'English',count: 91},
-// {country: 'French',count: 45},
-// {country: 'Arabic',count: 25},
-// ]```
-// *** Utilice el archivo countries_data.js para crear una función que cree los diez países más poblados.
+function mostPopulatedCountries(arr, n) {
+  const copy = JSON.parse(JSON.stringify(arr));
+  let slice = copy.sort((a, b) => b.population - a.population).slice(0, n);
+  slice.forEach((item) => console.log(item.name, item.population));
+  return slice
+}
+mostPopulatedCountries(countries_data, 4);
 
-// console.log(mostPopulatedCountries(countries, 10))
-
-// [
-// {country: 'China', population: 1377422166},
-// {country: 'India', population: 1295210000},
-// {country: 'United States of America', population: 323947000},
-// {country: 'Indonesia', population: 258705000},
-// {country: 'Brazil', population: 206135893},
-// {country: 'Pakistan', population: 194125062},
-// {country: 'Nigeria', population: 186988000},
-// {country: 'Bangladesh', population: 161006790},
-// {country: 'Russian Federation', population: 146599183},
-// {country: 'Japan', population: 126960000}
-// ]
-
-// console.log(mostPopulatedCountries(countries, 3))
-// [
-// {country: 'China', population: 1377422166},
-// {country: 'India', population: 1295210000},
-// {country: 'United States of America', population: 323947000}
-// ]
-// ```
 // *** Intenta desarrollar un programa que calcule la medida de tendencia central de una muestra(mean, median, mode) y medida de la variabilidad(range, variance, standard deviation). Además de esas medidas, encuentre el mínimo, el máximo, el recuento, el porcentaje y la distribución de frecuencias de la muestra. Puede crear un objeto llamado estadísticas y crear todas las funciones que hacen cálculos estadísticos como método para el objeto estadísticas. Comprueba el resultado que aparece a continuación.
-
+//este no lo entendi.
 // const ages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]
 
 // console.log('Count:', statistics.count()) // 25
