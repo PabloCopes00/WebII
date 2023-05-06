@@ -127,8 +127,6 @@ for (const [country, city] of countriesMap) {
 
 // Ejercicios: Nivel 1
 console.log(`\n\nEjercicios: Nivel 1:\n\n`);
-a = [4, 5, 8, 9];
-b = [3, 4, 5, 7];
 const countries = ["Finland", "Sweden", "Norway"];
 
 console.log(`crear un set vacío`);
@@ -155,18 +153,25 @@ console.log(codeSet);
 
 console.log(`Crear un map de países y el número de caracteres de un país`);
 const countriesMap1 = new Map();
-for (const country of countriesMap) {
-    countriesMap1.set(country[0], country[0].length)
+for (const country of countries) {
+    countriesMap1.set(country, country.length)
 }
 console.log(countriesMap1);
 
 
 // Ejercicios: Nivel 2
 console.log(`\n\nEjercicios: Nivel 2:\n\n`);
+a = [4, 5, 8, 9];
+b = [3, 4, 5, 7];
+console.log("A", a, "B", b);
+console.log(`Encontrar a unión b`);
+c = [...a, ...b];
+aUnionB = new Set(c);
 
-// console.log(`Encontrar a unión b`);
-
-// console.log(`Encontrar a intersección b`);
+console.log(`aUnionB = [...a, ...b];`, aUnionB);
+console.log(`Encontrar a intersección b`);
+let aInterB = a.filter((num) => B.has(num))
+console.log(`a.filter((num) => B.has(num))`, aInterB);
 
 // console.log(`Encontrar a con b`);
 
