@@ -176,8 +176,6 @@ console.log(`a.filter((num) => B.has(num))`, aInterB);
 // console.log(`Encontrar a con b`);
 
 // Ejercicios: Nivel 3
-//console.log(`\n\nEjercicios: Nivel 3:\n\n`);
-
-// console.log(`Cuántos idiomas hay en el archivo de objetos de países.`);
-
-// console.log(`Utiliza los datos de los países para encontrar las 10 lenguas más habladas:`);
+console.log(`\n\nEjercicios: Nivel 3:\n\n`);
+console.log(`Cuántos idiomas hay en el archivo de objetos de países.`);
+console.log(`Utiliza los datos de los países para encontrar las 10 lenguas más habladas:`);
