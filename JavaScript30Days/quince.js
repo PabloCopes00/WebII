@@ -50,29 +50,6 @@ class Person {
     const index = Math.floor(Math.random() * skills.length);
     return skills[index];
   }
-  static showDateTime() {
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    let date = now.getDate();
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-
-    let dateMonthYear = date + "/" + month + "/" + year;
-    let time = hours + ":" + minutes + ":" + seconds;
-    let fullTime = dateMonthYear + " " + time;
-    return fullTime;
-  }
 }
 
 const person1 = new Person("Pablo", "Copes", 37, "Argentina", "Tandil");
@@ -91,7 +68,6 @@ console.log(person1.getScore, person1.getSkills);
 console.log(person1.getPersonInfo());
 
 console.log(Person.randomSkill());
-console.log(Person.showDateTime());
 
 // Utilizando la herencia podemos acceder a todas las propiedades y métodos de la clase padre. Esto reduce la repetición de código.
 class Student extends Person {
@@ -177,15 +153,32 @@ class PersonAccount {
     this.income = [];
     this.expense = [];
   }
-  get getTotalIncome() {}
-  get getTotalExpense() {}
+  get getTotalIncome() {
+    let sum = 0;
+    this.income.forEach((e) => {
+      sum += e.amount;
+    });
+    return sum;
+  }
+  //acordate como recorrer
+  get getTotalExpense() {
+    let sum = 0;
+    this.expense.forEach((e) => {
+      sum += e.amount;
+    });
+    return sum;
+  }
 
   get getAccountInfo() {
-    let statement = `\nName: ${this.name}\n lastName: ${this.lastName}\nTotal Income: ${this.getTotalIncome}\nTotal Expenses: ${this.getTotalExpense}}`;
+    let statement = `\nName: ${this.name}\nLast Name: ${
+      this.lastName
+    }\nTotal Income: ${this.getTotalIncome}\nTotal Expense: ${
+      this.getTotalExpense
+    }\nDate: ${PersonAccount.showDateTime()}`;
     return statement;
   }
   get getAccountBalance() {
-    return this.getTotalExpense - this.getTotalIncome;
+    return this.getTotalIncome - this.getTotalExpense;
   }
   set setAddIncome(a) {
     this.income.push(a);
@@ -193,9 +186,59 @@ class PersonAccount {
   set setAddExpense(a) {
     this.expense.push(a);
   }
+  static showDateTime() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let date = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    if (date < 10) {
+      date = "0" + date;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    let dateMonthYear = date + "/" + month + "/" + year;
+    let time = hours + ":" + minutes + ":" + seconds;
+    let fullTime = dateMonthYear + " " + time;
+    return fullTime;
+  }
+  expenseFilter(arr, str) {
+    let filter = arr.filter((desc) => desc.description.includes(str));
+    return filter;
+  }
+  expenseFilterTotal(arr) {
+    let sum = arr.reduce(
+      (a, b) => a + (typeof b.amount == "number" ? b.amount : 0),
+      0
+    );
+    return sum;
+  }
 }
+
 const a1 = new PersonAccount("Pablo", "Copes");
-a1.setAddIncome = { sueldo1: 150000 };
-a1.setAddIncome = { sueldo2: 120000 };
-a1.setAddExpense = { alquiler: 100000 };
-console.log(a1.income);
+a1.setAddIncome = { amount: 150000, description: "Sueldo 1" };
+a1.setAddIncome = { amount: 120000, description: "Sueldo 2" };
+a1.setAddExpense = { amount: 700, description: "Leche" };
+a1.setAddExpense = { amount: 755, description: "Leche" };
+a1.setAddExpense = { amount: 1500, description: "Milanesas" };
+console.log(a1.getAccountInfo);
+console.log("Total income", a1.getTotalIncome);
+console.log("Total expense", a1.getTotalExpense);
+console.log("Balance", a1.getAccountBalance);
+console.log(a1.expenseFilter(a1.expense, "Leche"));
+console.log(a1.expenseFilter(a1.expense, "Milanesas"));
+console.log("Cuanto gasto hay en Mialnesas? ", a1.expenseFilterTotal(a1.expenseFilter(a1.expense, "Milanesas")));
+console.log("Cuanto gasto hay en Leche? ",a1.expenseFilterTotal(a1.expenseFilter(a1.expense, "Leche")));
